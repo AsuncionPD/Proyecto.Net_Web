@@ -1,0 +1,41 @@
+﻿@model AppWebBeachSA.Models.Cliente
+
+@{
+    ViewData["Title"] = "ObtenerDatosCliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+
+        <div class="col-md-4">
+            <form asp-action="ObtenerDatosCliente" method="post" id="FormularioLogin">
+                <h2 class="text-center">Obtener datos</h2>
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-warning" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                        <storng>@TempData["Error"]</storng>
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label asp-for="Cedula"></label>
+                    <input asp-for="Cedula" class="form-control" placeholder="Digite la cedula" />
+                    <span asp-validation-for="Cedula" class="text-danger"> </span>
+                </div>
+
+
+                <div class="form-group w-full">
+                    <input type="submit" class="btn btn-primary mt-3 form-control" value="Aceptar" />
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+

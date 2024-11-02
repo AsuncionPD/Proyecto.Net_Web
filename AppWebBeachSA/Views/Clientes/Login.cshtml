@@ -1,0 +1,49 @@
+﻿@model AppWebBeachSA.Models.Cliente
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Login</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <form asp-action="Login" id="FormularioLogin">
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-warning" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                        <storng>@TempData["Error"]</storng>
+
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" placeholder="test@AppDomain.com" />
+                    <span asp-validation-for="Email" class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"> </span>
+                    ¿No tienes cuenta?
+                    <a asp-controller="Clientes" asp-action="ObtenerDatosCliente">Crea una</a>
+                </div>
+
+                <div class="form-group mt-2">
+                    <input type="submit" class="btn btn-primary" value="Aceptar" />
+                </div>
+
+
+            </form>
+
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>

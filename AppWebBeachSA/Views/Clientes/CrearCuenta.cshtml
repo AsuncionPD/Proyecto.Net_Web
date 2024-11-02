@@ -1,0 +1,81 @@
+﻿@model AppWebBeachSA.Models.Cliente
+
+@{
+    ViewData["Title"] = "CrearCuenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+
+        <div class="col-md-4">
+            <form asp-action="CrearCuenta" id="FormularioLogin">
+                <h2 class="text-center">Crear Cuenta</h2>
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-warning" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                        <storng>@TempData["Error"]</storng>
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label asp-for="Cedula"></label>
+                    <input asp-for="Cedula" class="form-control" value="@TempData["Cedula"]" readonly />
+                    <span asp-validation-for="Cedula" class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TipoCedula"></label>
+                    <input asp-for="TipoCedula" class="form-control" value="@TempData["TipoCedula"]" readonly />
+                    <span asp-validation-for="TipoCedula" class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Nombre"></label>
+                    <input asp-for="Nombre" class="form-control" value="@TempData["Nombre"]" readonly />
+                    <span asp-validation-for="Nombre" class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Telefono"></label>
+                    <input asp-for="Telefono" class="form-control" />
+                    <span asp-validation-for="Telefono" class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Direccion"></label>
+                    <input asp-for="Direccion" class="form-control" />
+                    <span asp-validation-for="Direccion" class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" placeholder="test@AppDomain.com" />
+                    <span asp-validation-for="Email" class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label>Confirmar</label>
+                    <input name="confirmPassword" class="form-control" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"> </span>
+                </div>
+
+                <div class="form-group w-full">
+                    <input type="submit" class="btn btn-primary mt-3 form-control" value="Aceptar" />
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+
