@@ -1,0 +1,56 @@
+﻿body {
+    margin: 0;
+}
+
+.bg-container {
+    position: relative;
+    background-image: url('../imgs/Home.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 50rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .bg-container::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+
+.titlePosition {
+    position: relative;
+    z-index: 2;
+    font-weight: 700;
+    text-align: center;
+}
+
+.titlePosition h1 {
+    font-size: 4rem;
+}
+
+.buttom {
+    border: 2px solid #Efb810;
+    border-radius:0.5rem;
+    background: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1.25rem;
+    font-weight:700;
+}
+
+    .buttom:hover {
+        border-color: #Efb810;
+        background: #Efb810;
+        font-weight: 400;
+        color: white !important;
+        font-weight: 700;
+    }

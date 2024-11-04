@@ -4,38 +4,43 @@
     ViewData["Title"] = "ObtenerDatosCliente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-        </div>
-
-        <div class="col-md-4">
-            <form asp-action="ObtenerDatosCliente" method="post" id="FormularioLogin">
-                <h2 class="text-center">Obtener datos</h2>
-                @if (TempData["Error"] != null)
-                {
-                    <div class="alert alert-warning" role="alert">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-                        <storng>@TempData["Error"]</storng>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AppWebBeachSA.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/imgs/Home.jpg" style="background-size: cover;">
+</head>
+<body>
+    <div class="bg-container">
+        
+            <div class="">
+                <form asp-action="ObtenerDatosCliente" method="post" class="Form">
+                    <h1 class="text-center">BUSCAR</h1>
+                    <h1 class="text-center">INFORMACIÓN</h1>
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                            <storng>@TempData["Error"]</storng>
+                        </div>
+                    }
+                    <br />
+                    <div class="form-group mb-2">
+                    <label asp-for="Cedula" class="mb-1 fw-ligth"></label>
+                        <input asp-for="Cedula" class="form-control py-2" placeholder="Digite la cedula" />
+                        <span asp-validation-for="Cedula" class="text-danger"> </span>
                     </div>
-                }
+                    <br />
 
-                <div class="form-group">
-                    <label asp-for="Cedula"></label>
-                    <input asp-for="Cedula" class="form-control" placeholder="Digite la cedula" />
-                    <span asp-validation-for="Cedula" class="text-danger"> </span>
-                </div>
+                    <div class="form-group w-full">
+                        <input type="submit" class="btn buttom form-control text-black" value="Aceptar" />
+                    </div>
+                </form>
+            </div>
 
-
-                <div class="form-group w-full">
-                    <input type="submit" class="btn btn-primary mt-3 form-control" value="Aceptar" />
-                </div>
-            </form>
-        </div>
-
-        <div class="col-md-4">
-        </div>
     </div>
-</div>
+</body>
+
+</html>
 

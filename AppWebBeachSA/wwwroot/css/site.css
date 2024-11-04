@@ -20,3 +20,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.Form {
+    background-color: white;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+    border-radius:0.5rem;
+
+}
