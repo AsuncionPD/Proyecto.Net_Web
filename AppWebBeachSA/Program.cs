@@ -12,14 +12,14 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         config.Cookie.Name = "ClienteLoginCookie";
         config.LoginPath = "/Clientes/Login";
         config.Cookie.HttpOnly = true;
-        config.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        config.ExpireTimeSpan = TimeSpan.FromMinutes(20);
         config.AccessDeniedPath = "/Clientes/AccessDenied";
         config.SlidingExpiration = true;
     });
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(5);
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 

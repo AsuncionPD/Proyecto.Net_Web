@@ -1,5 +1,4 @@
-﻿@model AppWebBeachSA.Models.Cliente
-
+﻿@model AppWebBeachSA.Models.Empleado
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,7 +9,7 @@
         <div class="col-md-4">
         </div>
         <div class="col-md-4">
-            <h1 class="text-center">Login Clientes</h1>
+            <h1 class="text-center">Login Empleados</h1>
 
             <form asp-action="Login" id="FormularioLogin">
                 @if (TempData["Error"] != null)
@@ -32,11 +31,6 @@
                     <label asp-for="Password"></label>
                     <input asp-for="Password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger"> </span>
-                    ¿No tienes cuenta?
-                    <a asp-controller="Clientes" asp-action="ObtenerDatosCliente">Crea una</a>
-                    <br />
-                    Ingresa como 
-                    <a asp-controller="Empleados" asp-action="Login">Empleado</a>
                 </div>
 
                 <div class="form-group mt-2">
