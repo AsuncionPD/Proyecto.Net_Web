@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -18,6 +20,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    @{
+                        var tipoUsuario = HttpContextAccessor.HttpContext.Session.GetString("TipoUsuario");
+                    }
+
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -25,6 +31,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            if (tipoUsuario == "1")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Paquetes</a>
+                                </li>
+                            }
+                            else
+                            {
+                                if (tipoUsuario == "2")
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Reservar</a>
+                                    </li>
+                                }
+                            }
+                        }
                     </ul>
                     <ul class="navbar-nav">
                         @if (User.Identity.IsAuthenticated)
@@ -32,14 +57,24 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Hola @User.Identity.Name</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Clientes" asp-action="Logout">Logout</a>
-                            </li>
+                            
+                            if (tipoUsuario == "2")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Clientes" asp-action="Logout">Logout</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Empleados" asp-action="Logout">Logout</a>
+                                </li>
+                            }
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Clientes" asp-action="Login">Login</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Clientes" asp-action="Login">Iniciar Sesion &nbsp; <i class="fa-solid fa-user text-white"></i></a>
                             </li>
                         }
                     </ul>

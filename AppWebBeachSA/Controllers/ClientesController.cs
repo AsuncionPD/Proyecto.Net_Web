@@ -58,6 +58,9 @@ namespace AppWebBeachSA.Controllers
 
             if (autorizacion != null && autorizacion.Resultado == true)
             {
+                var tipoUsuario = autorizacion.TipoUsuario;
+                HttpContext.Session.SetString("TipoUsuario", tipoUsuario.ToString());
+
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, cliente.Email));
                 var principal = new ClaimsPrincipal(identity);
