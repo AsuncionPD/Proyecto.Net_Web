@@ -63,12 +63,13 @@ namespace AppWebBeachSA.Controllers
 
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, cliente.Email));
+                identity.AddClaim(new Claim("UserId", cliente.Cedula.ToString()));
                 var principal = new ClaimsPrincipal(identity);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 HttpContext.Session.SetString("token", autorizacion.Token);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Reservaciones");
             }
             else
             {

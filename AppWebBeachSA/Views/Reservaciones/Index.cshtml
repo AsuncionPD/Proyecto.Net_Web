@@ -1,0 +1,126 @@
+﻿@model IEnumerable<AppWebBeachSA.Models.Reservacion>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Reservar">Reservar</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservacionID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClienteID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaqueteID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaReservacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Noches)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Personas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalSinDescuento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescuentoPorcentaje)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalConDescuento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormaPago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroCheque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Banco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prima)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RestoEnMensualidades)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoCambio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalUSD)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservacionID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClienteID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaqueteID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaReservacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Noches)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Personas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSinDescuento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescuentoPorcentaje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalConDescuento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormaPago)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroCheque)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Banco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prima)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestoEnMensualidades)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoCambio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalUSD)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ReservacionID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ReservacionID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ReservacionID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

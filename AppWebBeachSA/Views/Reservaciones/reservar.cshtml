@@ -1,0 +1,146 @@
+﻿@model AppWebBeachSA.Models.Reservacion
+
+@{
+    ViewData["Title"] = "reservar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>reservar</h1>
+
+<h4>Reservacion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="reservar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="PaqueteID" class="control-label"></label>
+                <select class="form-control " asp-for="PaqueteID" id="paqueteSelect">
+                    @foreach (var item in ViewBag.Paquetes)
+                    {
+                        <option value=@item.PaqueteID data-precio=@item.PrecioPorPersonaPorNoche>@item.Nombre</option>
+                    }
+                </select>               
+                <span asp-validation-for="PaqueteID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaReservacion" class="control-label"></label>
+                <input asp-for="FechaReservacion" class="form-control" />
+                <span asp-validation-for="FechaReservacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Noches" class="control-label"></label>
+                <input asp-for="Noches" class="form-control" />
+                <span asp-validation-for="Noches" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Personas" class="control-label"></label>
+                <input asp-for="Personas" class="form-control" />
+                <span asp-validation-for="Personas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalSinDescuento" class="control-label"></label>
+                <input asp-for="TotalSinDescuento" class="form-control" />
+                <span asp-validation-for="TotalSinDescuento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescuentoPorcentaje" class="control-label"></label>
+                <input asp-for="DescuentoPorcentaje" class="form-control" />
+                <span asp-validation-for="DescuentoPorcentaje" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalConDescuento" class="control-label"></label>
+                <input asp-for="TotalConDescuento" class="form-control" />
+                <span asp-validation-for="TotalConDescuento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormaPago" class="control-label"></label>
+                <input asp-for="FormaPago" class="form-control" />
+                <span asp-validation-for="FormaPago" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroCheque" class="control-label"></label>
+                <input asp-for="NumeroCheque" class="form-control" />
+                <span asp-validation-for="NumeroCheque" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Banco" class="control-label"></label>
+                <input asp-for="Banco" class="form-control" />
+                <span asp-validation-for="Banco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prima" class="control-label"></label>
+                <input asp-for="Prima" class="form-control" />
+                <span asp-validation-for="Prima" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RestoEnMensualidades" class="control-label"></label>
+                <input asp-for="RestoEnMensualidades" class="form-control" />
+                <span asp-validation-for="RestoEnMensualidades" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoCambio" class="control-label"></label>
+                <input asp-for="TipoCambio" class="form-control" value=@ViewBag.tipoCambio />
+                <span asp-validation-for="TipoCambio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalUSD" class="control-label"></label>
+                <input asp-for="TotalUSD" class="form-control" />
+                <span asp-validation-for="TotalUSD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const paqueteSelect = document.getElementById("paqueteSelect");
+        const totalSinDescuentoInput = document.getElementById("TotalSinDescuento");
+        const totalUSD = document.getElementById("TotalUSD");
+
+        // Escucha el cambio en el selector de paquetes
+        paqueteSelect.addEventListener("change", function () {
+            // Obtiene el precio del paquete seleccionado
+            const selectedOption = paqueteSelect.options[paqueteSelect.selectedIndex];
+            const precioPorPersonaPorNoche = selectedOption.getAttribute("data-precio");
+
+            // Suponiendo que tienes un campo para el número de noches y personas
+            const noches = document.getElementById("Noches").value || 1;
+            const personas = document.getElementById("Personas").value || 1;
+
+            // Calcula el total sin descuento
+            const totalSinDescuento = precioPorPersonaPorNoche * noches * personas;
+
+            // Actualiza el campo
+            totalSinDescuentoInput.value = totalSinDescuento.toFixed(2);
+        });
+
+        // También actualiza el total si cambia el número de noches o personas
+        document.getElementById("Noches").addEventListener("input", updateTotal);
+        document.getElementById("Personas").addEventListener("input", updateTotal);
+
+        function updateTotal() {
+            const precioPorPersonaPorNoche = paqueteSelect.options[paqueteSelect.selectedIndex].getAttribute("data-precio");
+            const noches = document.getElementById("Noches").value || 1;
+            const personas = document.getElementById("Personas").value || 1;
+
+            const totalSinDescuento = precioPorPersonaPorNoche * noches * personas;
+            totalSinDescuentoInput.value = totalSinDescuento.toFixed(2);
+            const tipocambio = document.getElementById("TipoCambio").value;
+            const totalusa = totalSinDescuento / tipocambio;
+            totalUSD.value = totalusa.toFixed(2);
+        }
+    });
+</script>
