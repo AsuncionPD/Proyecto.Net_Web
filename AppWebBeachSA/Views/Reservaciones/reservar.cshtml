@@ -5,100 +5,127 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>reservar</h1>
+<body style="background-color:#413E3E">
+    <section class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                    <div>
+                        <div class="card shadow-lg border-0" style="border-radius: 1rem;">
+                            <div class="p-4">
+                                <div class="card-body text-black">
+                                    <h1 class="text-center mb-4">Reservation</h1>
+                                    <form asp-action="reservar">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="PaqueteID" class="control-label">Package</label>
+                                                <select class="form-control mt-2" asp-for="PaqueteID" id="paqueteSelect">
+                                                    @foreach (var item in ViewBag.Paquetes)
+                                                    {
+                                                        <option value=@item.PaqueteID data-precio=@item.PrecioPorPersonaPorNoche>@item.Nombre</option>
+                                                    }
+                                                </select>
+                                                <span asp-validation-for="PaqueteID" class="text-danger"></span>
+                                            </div>
 
-<h4>Reservacion</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="reservar">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="FechaReservacion" class="control-label">Reservation Date</label>
+                                                <input asp-for="FechaReservacion" class="form-control mt-2" />
+                                                <span asp-validation-for="FechaReservacion" class="text-danger"></span>
+                                            </div>
 
-            <div class="form-group">
-                <label asp-for="PaqueteID" class="control-label"></label>
-                <select class="form-control " asp-for="PaqueteID" id="paqueteSelect">
-                    @foreach (var item in ViewBag.Paquetes)
-                    {
-                        <option value=@item.PaqueteID data-precio=@item.PrecioPorPersonaPorNoche>@item.Nombre</option>
-                    }
-                </select>               
-                <span asp-validation-for="PaqueteID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaReservacion" class="control-label"></label>
-                <input asp-for="FechaReservacion" class="form-control" />
-                <span asp-validation-for="FechaReservacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Noches" class="control-label"></label>
-                <input asp-for="Noches" class="form-control" />
-                <span asp-validation-for="Noches" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Personas" class="control-label"></label>
-                <input asp-for="Personas" class="form-control" />
-                <span asp-validation-for="Personas" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalSinDescuento" class="control-label"></label>
-                <input asp-for="TotalSinDescuento" class="form-control" />
-                <span asp-validation-for="TotalSinDescuento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescuentoPorcentaje" class="control-label"></label>
-                <input asp-for="DescuentoPorcentaje" class="form-control" />
-                <span asp-validation-for="DescuentoPorcentaje" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalConDescuento" class="control-label"></label>
-                <input asp-for="TotalConDescuento" class="form-control" />
-                <span asp-validation-for="TotalConDescuento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FormaPago" class="control-label"></label>
-                <input asp-for="FormaPago" class="form-control" />
-                <span asp-validation-for="FormaPago" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumeroCheque" class="control-label"></label>
-                <input asp-for="NumeroCheque" class="form-control" />
-                <span asp-validation-for="NumeroCheque" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Banco" class="control-label"></label>
-                <input asp-for="Banco" class="form-control" />
-                <span asp-validation-for="Banco" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Prima" class="control-label"></label>
-                <input asp-for="Prima" class="form-control" />
-                <span asp-validation-for="Prima" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RestoEnMensualidades" class="control-label"></label>
-                <input asp-for="RestoEnMensualidades" class="form-control" />
-                <span asp-validation-for="RestoEnMensualidades" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipoCambio" class="control-label"></label>
-                <input asp-for="TipoCambio" class="form-control" value=@ViewBag.tipoCambio />
-                <span asp-validation-for="TipoCambio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalUSD" class="control-label"></label>
-                <input asp-for="TotalUSD" class="form-control" />
-                <span asp-validation-for="TotalUSD" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="Noches" class="control-label">Nights</label>
+                                                <input asp-for="Noches" class="form-control mt-2" />
+                                                <span asp-validation-for="Noches" class="text-danger"></span>
+                                            </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="Personas" class="control-label ">Number of People</label>
+                                                <input asp-for="Personas" class="form-control mt-2" />
+                                                <span asp-validation-for="Personas" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="TotalSinDescuento" class="control-label ">Total Without Discount</label>
+                                                <input asp-for="TotalSinDescuento" class="form-control mt-2" />
+                                                <span asp-validation-for="TotalSinDescuento" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="DescuentoPorcentaje" class="control-label ">Discount Percentage</label>
+                                                <input asp-for="DescuentoPorcentaje" class="form-control mt-2" />
+                                                <span asp-validation-for="DescuentoPorcentaje" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="TotalConDescuento" class="control-label ">Total With Discount</label>
+                                                <input asp-for="TotalConDescuento" class="form-control mt-2" />
+                                                <span asp-validation-for="TotalConDescuento" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="FormaPago" class="control-label ">Payment Method</label>
+                                                <input asp-for="FormaPago" class="form-control mt-2" />
+                                                <span asp-validation-for="FormaPago" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="NumeroCheque" class="control-label ">Check Number</label>
+                                                <input asp-for="NumeroCheque" class="form-control mt-2" />
+                                                <span asp-validation-for="NumeroCheque" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="Banco" class="control-label ">Bank</label>
+                                                <input asp-for="Banco" class="form-control mt-2" />
+                                                <span asp-validation-for="Banco" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="Prima" class="control-label ">Down Payment</label>
+                                                <input asp-for="Prima" class="form-control mt-2" />
+                                                <span asp-validation-for="Prima" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="RestoEnMensualidades" class="control-label ">Remaining in Monthly Payments</label>
+                                                <input asp-for="RestoEnMensualidades" class="form-control mt-2" />
+                                                <span asp-validation-for="RestoEnMensualidades" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="TipoCambio" class="control-label ">Exchange Rate</label>
+                                                <input asp-for="TipoCambio" class="form-control mt-2" value=@ViewBag.tipoCambio />
+                                                <span asp-validation-for="TipoCambio" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label asp-for="TotalUSD" class="control-label ">Total in USD</label>
+                                                <input asp-for="TotalUSD" class="form-control mt-2" />
+                                                <span asp-validation-for="TotalUSD" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <input type="submit" value="Create" class="btn btn-dark btn-lg w-100" />
+                                        </div>
+                                        <div>
+                                            <a class="btn btn-info w-100 mt-3 text-white" asp-action="Index">Back to List</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

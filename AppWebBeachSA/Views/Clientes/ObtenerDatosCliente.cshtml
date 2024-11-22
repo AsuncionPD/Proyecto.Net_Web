@@ -13,11 +13,9 @@
 </head>
 <body>
     <div class="bg-container">
-        
-            <div class="">
+            <div>
                 <form asp-action="ObtenerDatosCliente" method="post" class="Form">
-                    <h1 class="text-center">BUSCAR</h1>
-                    <h1 class="text-center">INFORMACIÓN</h1>
+                <h1 class="text-center">Search ID</h1>  
                     @if (TempData["Error"] != null)
                     {
                         <div class="alert alert-warning" role="alert">
@@ -27,14 +25,14 @@
                     }
                     <br />
                     <div class="form-group mb-2">
-                    <label asp-for="Cedula" class="mb-1 fw-ligth"></label>
-                        <input asp-for="Cedula" class="form-control py-2" placeholder="Digite la cedula" />
+                    <label asp-for="Cedula" class="mb-1 fw-normal">ID</label>
+                    <input asp-for="Cedula" class="form-control py-2" placeholder="type the ID" />
                         <span asp-validation-for="Cedula" class="text-danger"> </span>
                     </div>
                     <br />
 
                     <div class="form-group w-full">
-                        <input type="submit" class="btn buttom form-control text-black" value="Aceptar" />
+                    <input type="submit" class="btn btn-dark btn-lg form-control" value="Aceptar" />
                     </div>
                 </form>
             </div>

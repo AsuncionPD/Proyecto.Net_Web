@@ -3,45 +3,66 @@
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body style="background-color:#413E3E">
+    <section>
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card border-0 mt-3" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-5 d-none d-md-block ">
+                                <img src="https://stimulus-consultoria.com/wp-content/uploads/2023/06/compromiso-y-sentido-pertenecia-de-los-empleados-en-la-empresa.jpg"
+                                     alt="login form" class="img-fluid h-100" style="border-radius: 1rem 0 0 1rem;" />
+                            </div>
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5 text-black">
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-            <h1 class="text-center">Login Empleados</h1>
+                                    <form asp-action="Login" id="FormularioLogin">
+                                        @if (TempData["Error"] != null)
+                                        {
+                                            <div class="alert alert-warning" role="alert">
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                                                <storng>@TempData["Error"]</storng>
 
-            <form asp-action="Login" id="FormularioLogin">
-                @if (TempData["Error"] != null)
-                {
-                    <div class="alert alert-warning" role="alert">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-                        <storng>@TempData["Error"]</storng>
+                                            </div>
+                                        }
 
+                                        <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account employee!!!</h2>
+
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="form-label"></label>
+                                            <input asp-for="Email" class="form-control" placeholder="test@AppDomain.com" />
+                                            <span asp-validation-for="Email" class="text-danger"> </span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label asp-for="Password" class="form-label mt-3"></label>
+                                            <input asp-for="Password" class="form-control" />
+                                            <span asp-validation-for="Password" class="text-danger"> </span>
+                                        </div>
+
+                                        <div class="form-group mb-4 mt-4">
+                                            <input type="submit" value="Login" class="btn btn-dark btn-lg w-100" />
+                                        </div>
+
+                                        <a class="small text-muted mt-3 mb-3" href="#!">Forgot password?</a>
+                                        <p class="mb-2 pb-lg-2  mt-3" style="color: #393f81;">
+                                            Don't have an account? <a asp-controller="Empleados" asp-action="CrearCuenta">Create a</a>
+                                        </p>
+
+                                        <p class="mb-2 pb-lg-2" style="color: #393f81;">
+                                            Sign in as <a asp-controller="Clientes" asp-action="Login">Client</a>
+                                        </p>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                }
-
-                <div class="form-group">
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" class="form-control" placeholder="test@AppDomain.com" />
-                    <span asp-validation-for="Email" class="text-danger"> </span>
                 </div>
-
-                <div class="form-group">
-                    <label asp-for="Password"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"> </span>
-                </div>
-
-                <div class="form-group mt-2">
-                    <input type="submit" class="btn btn-primary" value="Aceptar" />
-                </div>
-
-
-            </form>
-
+            </div>
         </div>
-        <div class="col-md-4">
-        </div>
-    </div>
-</div>
+    </section>
+</body>
+
+
