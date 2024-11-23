@@ -17,6 +17,40 @@
 }
 
     .bg-gray:hover {
+        border-color: darkgoldenrod !important;
         background-color: darkgoldenrod !important;
         color: white !important;
     }
+
+.room-item img.post-image {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.room-item:hover img.post-image {
+    opacity: 0.5;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.product-description {
+    opacity: 0;
+    bottom: -125px;
+    transition: all 0.5s ease-in-out;
+}
+
+.room-item:hover .product-description {
+    opacity: 1;
+    bottom: 20px;
+}
+
+@media only screen and (min-width:770px) and (max-width: 1400px) {
+    .product-description {
+        bottom: -180px;
+    }
+}
+.text-darkgoldenrod {
+    color: darkgoldenrod !important;
+}

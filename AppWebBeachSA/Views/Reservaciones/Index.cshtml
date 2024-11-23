@@ -4,123 +4,95 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/landing.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AppWebBeachSA.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/imgs/Home.jpg" style="background-size: cover;">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" asp-append-version="true" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" asp-append-version="true">
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol xmlns="http://www.w3.org/2000/svg" id="plus" viewBox="0 0 16 16">
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" id="minus" viewBox="0 0 16 16">
+        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+    </symbol>
+</svg>
 
-<h1 class="mx-3">Reservations</h1>
+    <section id="room" class="padding-medium">
+        <div class="container-fluid padding-side" data-aos="fade-up">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                    <h3 class="display-3 fw-normal text-center">Explore our packages</h3>
+            </div>
 
-<p class="mx-3">
-    <a class="btn btn-dark btn-lg" asp-action="Reservar">Reserve</a>
-</p>
-<table class="table table-striped mx-3" style="width:80%">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ReservacionID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClienteID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaqueteID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaReservacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Noches)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Personas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalSinDescuento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescuentoPorcentaje)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalConDescuento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FormaPago)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumeroCheque)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Banco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prima)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RestoEnMensualidades)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoCambio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalUSD)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReservacionID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClienteID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaqueteID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaReservacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Noches)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Personas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalSinDescuento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescuentoPorcentaje)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalConDescuento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FormaPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroCheque)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Banco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prima)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestoEnMensualidades)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoCambio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalUSD)
-            </td>
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ReservacionID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ReservacionID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ReservacionID })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <div class="swiper room-swiper mt-5">
+                <div class="swiper-wrapper">
+                    @for (int i = 0; i < ViewBag.Paquetes.Count; i++)
+                    {
+                        var item = ViewBag.Paquetes[i];
+                        var image = i + "Room.jpg"; 
+
+                        <div class="swiper-slide">
+                            <div class="room-item position-relative bg-black rounded-5 overflow-hidden">
+                                <img src="~/imgs/@image" alt="img" class="post-image img-fluid rounded-4">
+                                <div class="product-description position-absolute p-5 text-start">
+                                    <h4 class="display-6 fw-normal text-white">@item.Nombre</h4>
+                                
+                                    <table>
+                                        <tbody>
+                                            <tr class="text-white">
+                                                <td class="pe-2">Price:</td>
+                                                <td class="price">@item.PrecioPorPersonaPorNoche /Per persont</td>
+                                            </tr>
+                                            <tr class="text-white">
+                                                <td class="pe-2">Percentage:</td>
+                                                <td>@item.PrimaPorcentaje</td>
+                                            </tr>
+                                            <tr class="text-white">
+                                                <td class="pe-2">Monthly payments</td>
+                                                <td>@item.Mensualidades</td>
+                                            </tr>
+                                            <tr class="text-white">
+                                                <td class="pe-2">Services:</td>
+                                                <td>Wifi, Television, Bathroom,...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a href="index.html">
+                                        <p class="text-decoration-underline text-white m-0 mt-2">Browse Now</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="room-content text-center mt-3">
+                                @Html.ActionLink($"{@item.Nombre}", "paquete", new { id = item.PaqueteID }, new { @class = " display-6 fw-normal text-darkgoldenrod text-decoration-none" })
+                                <p class="text-darkgoldenrod"><span class="text-black fs-4">@item.PrecioPorPersonaPorNoche</span>/person</p>
+                            </div>
+                        </div>
+
+                    }
+                   
+                </div>
+                <div class="swiper-pagination room-pagination position-relative mt-5"></div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>

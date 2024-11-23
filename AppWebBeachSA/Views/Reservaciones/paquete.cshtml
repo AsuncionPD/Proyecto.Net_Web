@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "paquete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/landing.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AppWebBeachSA.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/imgs/Home.jpg" style="background-size: cover;">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" asp-append-version="true" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" asp-append-version="true">
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol xmlns="http://www.w3.org/2000/svg" id="plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="minus" viewBox="0 0 16 16">
+            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+        </symbol>
+    </svg>
+
+    <section id="header" data-aos="fade-up">
+        <div class="header mt-3">
+            <div class="rounded-5"
+                 style="background-image: url(imgs/@ViewBag.image); background-size: cover; background-repeat: no-repeat; height: 85vh; background-position: center;">
+                <div class="titlePosition">
+                    <section class="text-black mb-lg-5">
+                        <h2>The Best for your Rest</h2>
+                        <h2>Hotel Beach</h2>
+                    </section>
+                    <a asp-area="" asp-controller="Clientes" asp-action="ObtenerDatosCliente" class="btn btn-primary bg-gray mt-3">
+                        Join Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+
+
+
+
+
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
