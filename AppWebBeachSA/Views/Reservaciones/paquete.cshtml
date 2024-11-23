@@ -1,58 +1,182 @@
-﻿
+﻿@model AppWebBeachSA.Models.Reservacion 
+
+
 @{
     ViewData["Title"] = "paquete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/landing.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/AppWebBeachSA.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/imgs/Home.jpg" style="background-size: cover;">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" asp-append-version="true" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" asp-append-version="true">
-</head>
-<body>
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol xmlns="http://www.w3.org/2000/svg" id="plus" viewBox="0 0 16 16">
-            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-        </symbol>
-        <symbol xmlns="http://www.w3.org/2000/svg" id="minus" viewBox="0 0 16 16">
-            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
-        </symbol>
-    </svg>
 
-    <section id="header" data-aos="fade-up">
-        <div class="header mt-3">
-            <div class="rounded-5"
-                 style="background-image: url(imgs/@ViewBag.image); background-size: cover; background-repeat: no-repeat; height: 85vh; background-position: center;">
-                <div class="titlePosition">
-                    <section class="text-black mb-lg-5">
-                        <h2>The Best for your Rest</h2>
-                        <h2>Hotel Beach</h2>
-                    </section>
-                    <a asp-area="" asp-controller="Clientes" asp-action="ObtenerDatosCliente" class="btn btn-primary bg-gray mt-3">
-                        Join Up
-                    </a>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="mb-4">@ViewBag.paquete.Nombre</h3>
+            <img src="~/imgs/@ViewBag.image" alt="Habitación" class="img-fluid rounded">
+        </div>
+
+        <div class="col-md-6">
+            <h3 class="mb-4">Formulario de Reserva</h3>
+            <form asp-action="paquete" method="post">
+                >
+                <!-- Campo para la fecha -->
+                <div class="mb-3">
+                    <label for="fecha" asp-for="FechaReservacion" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="fecha" asp-for="FechaReservacion"required>
                 </div>
+                <!-- Campo para noches -->
+                <div class="mb-3">
+                    <label asp-for="Noches" for="noches" class="form-label">Noches</label>
+                    <input type="number" class="form-control" id="noches" name="noches" asp-for="Noches" min="1" required>
+                </div>
+                <!-- Campo para personas -->
+                <div class="mb-3">
+                    <label for="personas" asp-for="Personas" class="form-label">Personas</label>
+                    <input type="number" asp-for="Personas" class="form-control" id="personas" name="personas" min="1" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="FormaPago" class="control-label ">Payment Method</label>
+                    <input asp-for="FormaPago" class="form-control mt-2" />
+                    <span asp-validation-for="FormaPago" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="NumeroCheque" class="control-label ">Check Number</label>
+                    <input asp-for="NumeroCheque" class="form-control mt-2" />
+                    <span asp-validation-for="NumeroCheque" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label asp-for="Banco" class="control-label ">Bank</label>
+                    <input asp-for="Banco" class="form-control mt-2" />
+                    <span asp-validation-for="Banco" class="text-danger"></span>
+                </div>
+
+                <input name="id" value=@ViewBag.paquete.PaqueteID />
+                <!-- Botón de envío -->
+                <button type="submit" class="btn btn-primary">Reservar</button>
+            </form>
+        </div>
+       
+    </div>
+</div>
+@if (TempData["TotalFinal"] != null)
+{
+    <div class="modal show d-block" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Reserva</h5>
+                    <a href="@Url.Action("Index")" class="btn-close" aria-label="Close"></a>
+                </div>
+                <section class="d-flex align-items-center justify-content-center min-vh-100">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-8">
+                                         <div class="card-body text-black">
+                                                <h1 class="text-center mb-4">Reservation</h1>
+                                                  <form asp-action="Create" method="post">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="PaqueteID" class="control-label">Package</label>
+
+                                                            <input asp-for="PaqueteID" class="form-control mt-2" />
+
+                                                            <span asp-validation-for="PaqueteID" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="FechaReservacion" class="control-label">Reservation Date</label>
+                                                            <input asp-for="FechaReservacion" class="form-control mt-2" />
+                                                            <span asp-validation-for="FechaReservacion" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="Noches" class="control-label">Nights</label>
+                                                            <input asp-for="Noches" class="form-control mt-2" />
+                                                            <span asp-validation-for="Noches" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="Personas" class="control-label ">Number of People</label>
+                                                            <input asp-for="Personas" class="form-control mt-2" />
+                                                            <span asp-validation-for="Personas" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="TotalSinDescuento" class="control-label ">Total Without Discount</label>
+                                                            <input asp-for="TotalSinDescuento" class="form-control mt-2" />
+                                                            <span asp-validation-for="TotalSinDescuento" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="DescuentoPorcentaje" class="control-label ">Discount Percentage</label>
+                                                            <input asp-for="DescuentoPorcentaje" class="form-control mt-2" />
+                                                            <span asp-validation-for="DescuentoPorcentaje" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="TotalConDescuento" class="control-label ">Total With Discount</label>
+                                                            <input asp-for="TotalConDescuento" class="form-control mt-2" />
+                                                            <span asp-validation-for="TotalConDescuento" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="FormaPago" class="control-label ">Payment Method</label>
+                                                            <input asp-for="FormaPago" class="form-control mt-2" />
+                                                            <span asp-validation-for="FormaPago" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="NumeroCheque" class="control-label ">Check Number</label>
+                                                            <input asp-for="NumeroCheque" class="form-control mt-2" />
+                                                            <span asp-validation-for="NumeroCheque" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="Banco" class="control-label ">Bank</label>
+                                                            <input asp-for="Banco" class="form-control mt-2" />
+                                                            <span asp-validation-for="Banco" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="Prima" class="control-label ">Down Payment</label>
+                                                            <input asp-for="Prima" class="form-control mt-2" />
+                                                            <span asp-validation-for="Prima" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="RestoEnMensualidades" class="control-label ">Remaining in Monthly Payments</label>
+                                                            <input asp-for="RestoEnMensualidades" class="form-control mt-2" />
+                                                            <span asp-validation-for="RestoEnMensualidades" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="TipoCambio" class="control-label ">Exchange Rate</label>
+                                                            <input asp-for="TipoCambio" class="form-control mt-2" />
+                                                            <span asp-validation-for="TipoCambio" class="text-danger"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label asp-for="TotalUSD" class="control-label ">Total in USD</label>
+                                                            <input asp-for="TotalUSD" class="form-control mt-2" />
+                                                            <span asp-validation-for="TotalUSD" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mt-3">
+                                                        <input type="submit" value="Create" class="btn btn-dark btn-lg w-100" />
+                                                    </div>
+                                                    <div>
+                                                        <a class="btn btn-info w-100 mt-3 text-white" asp-action="Index">Back to List</a>
+                                                    </div>
+                                                </form>
+                                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-    </section>
-
-   
-
+    </div>
+}
 
 
 
-
-
-    <script src="js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="js/plugins.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-</body>
-</html>

@@ -10,6 +10,11 @@
     
 }
 
+.container3{
+    display:grid;
+    grid-template-columns:auto auto;
+}
+
 .bg-gray {
     background-color: #F9F6F3 !important;
     border-color: #F9F6F3 !important;
@@ -54,3 +59,4 @@
 .text-darkgoldenrod {
     color: darkgoldenrod !important;
 }
+

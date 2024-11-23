@@ -63,7 +63,7 @@ namespace AppWebBeachSA.Controllers
 
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, cliente.Email));
-                identity.AddClaim(new Claim("UserId", cliente.Cedula.ToString()));
+                identity.AddClaim(new Claim("UserId", autorizacion.Cedula.ToString()));
                 var principal = new ClaimsPrincipal(identity);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
