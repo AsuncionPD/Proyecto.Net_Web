@@ -241,62 +241,41 @@
         <div class="container">
             <h4 class="display-3 fw-normal text-center mt-3" data-aos="fade-up">My Reservations</h4>
             <div class="row g-4 mt-3">
-                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card border-0 shadow-sm rounded-4">
-                        <img src="https://via.placeholder.com/400x200" class="card-img-top rounded-top-4" alt="Room Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Deluxe Room</h5>
-                            <p class="card-text text-muted mb-1">
-                                <i class="bi bi-calendar-check me-2"></i><strong>Check-in:</strong> 2024-12-01
-                            </p>
-                            <p class="card-text text-muted mb-3">
-                                <i class="bi bi-calendar-x me-2"></i><strong>Check-out:</strong> 2024-12-05
-                            </p>
-                            <p class="card-text">
-                                <i class="bi bi-person-fill me-2"></i><strong>Guests:</strong> 2 Adults, 1 Child
-                            </p>
-                            <div class="d-flex justify-content-between mt-4">
-                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
-                                    <i class="bi bi-eye me-2"></i>View
-                                </button>
-                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
-                                    <i class="bi bi-pencil me-2"></i>Modify
-                                </button>
-                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
-                                    <i class="bi bi-trash me-2"></i>Cancel
-                                </button>
+                @foreach (var item in Model) {
+                    var fechaSalida = item.FechaReservacion.AddDays(item.Noches);
+                    var image = (@item.PaqueteID - 1) + "Room.jpg";
+                    <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card border-0 shadow-sm rounded-4">
+                            <img src="~/imgs/@image" class="card-img-top rounded-top-4" alt="Room Image">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">Deluxe Room</h5>
+                                <p class="card-text text-muted mb-1">
+                                    <i class="bi bi-calendar-check me-2"></i><strong>Check-in:</strong> @item.FechaReservacion
+                                </p>
+                                <p class="card-text text-muted mb-3">
+                                    <i class="bi bi-calendar-x me-2"></i><strong>Check-out:</strong> @fechaSalida
+                                </p>
+                                <p class="card-text">
+                                    <i class="bi bi-person-fill me-2"></i><strong>Guests:</strong> @item.Personas person
+                                </p>
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
+                                        <i class="bi bi-eye me-2"></i>View
+                                    </button>
+                                    <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
+                                        <i class="bi bi-pencil me-2"></i>Modify
+                                    </button>
+                                    <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
+                                        <i class="bi bi-trash me-2"></i>Cancel
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card border-0 shadow-sm rounded-4">
-                        <img src="https://via.placeholder.com/400x200" class="card-img-top rounded-top-4" alt="Room Image">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Ocean View Suite</h5>
-                            <p class="card-text text-muted mb-1">
-                                <i class="bi bi-calendar-check me-2"></i><strong>Check-in:</strong> 2024-12-10
-                            </p>
-                            <p class="card-text text-muted mb-3">
-                                <i class="bi bi-calendar-x me-2"></i><strong>Check-out:</strong> 2024-12-15
-                            </p>
-                            <p class="card-text">
-                                <i class="bi bi-person-fill me-2"></i><strong>Guests:</strong> 3 Adults
-                            </p>
-                            <div class="d-flex justify-content-between mt-4">
-                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
-                                    <i class="bi bi-eye me-2"></i>View
-                                </button>
-                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
-                                    <i class="bi bi-pencil me-2"></i>Modify
-                                </button>
-                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
-                                    <i class="bi bi-trash me-2"></i>Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
+                
+
+ 
             </div>
 
             <div class="text-center mt-5" data-aos="fade-up" style="display: none;" id="no-reservations">
@@ -520,7 +499,7 @@
 
     <section id="testimonials" class="py-5 bg-light">
         <div class="container text-center">
-            <h2 class="mb-4" data-aos="fade-left">Guest Reviews</h2>
+            <h2 class="mb-4" data-aos="fade-up">Guest Reviews</h2>
             <div id="testimonialCarousel" class="carousel carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-aos="fade-up">
