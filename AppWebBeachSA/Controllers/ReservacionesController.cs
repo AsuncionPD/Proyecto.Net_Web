@@ -212,7 +212,7 @@ namespace AppWebBeachSA.Controllers
             if (resultado.IsSuccessStatusCode) //si todo fue correcto
             {
                 //se ubica al usuario dentro del listado de reservaciones
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Clientes");
             }
             else
             {
