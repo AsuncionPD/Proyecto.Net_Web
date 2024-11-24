@@ -29,3 +29,11 @@ body {
     border-radius:0.5rem;
 
 }
+
+.hover-effect {
+    color: #000000;
+}
+
+.hover-effect:hover {
+    color: #0dcaf0; 
+}

@@ -1,0 +1,180 @@
+﻿@model IEnumerable<AppWebBeachSA.Models.Paquete>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex align-items-center justify-content-center">
+    <div style="width: 80%;">
+        <h1 class="mt-5">Manage Packages</h1>
+
+        <p class="mb-4" style="margin-top:2rem;">
+            <a class="btn btn-outline-info fw-bold" asp-action="Create">Create New</a>
+        </p>
+
+
+
+        <div class="table-responsive">
+            <table class="table table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PaqueteID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PrecioPorPersonaPorNoche)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PrimaPorcentaje)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Mensualidades)
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaqueteID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PrecioPorPersonaPorNoche)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PrimaPorcentaje)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Mensualidades)
+                            </td>
+                            <td class="d-flex justify-content-center">
+
+                                <a href="@Url.Action("Edit", "Paquetes", new { id = item.PaqueteID })" class="btn btn-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square hover-effect" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                    </svg>
+                                </a>
+
+                                @{
+                                    var idDetailsModal = "Details_" + item.PaqueteID;
+                                    var idDeleteModal = "Delete_" + item.PaqueteID;
+                                }
+
+                                <!-- Button details -->
+                                <button type="button" class="border-0 bg-transparent btn btn-link" data-bs-toggle="modal" data-bs-target="#@idDetailsModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-square hover-effect" viewBox="0 0 16 16">
+                                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                    </svg>
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id=@idDetailsModal tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header mx-3">
+                                                <h3 class="modal-title fw-bold" id="exampleModalLabel">Package Details</h3>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body mx-3 text-start">
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold">Name</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.Nombre</div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold">Price per person</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.PrecioPorPersonaPorNoche</div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold">Down Payment Percentage</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.PrimaPorcentaje</div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold">Monthly Payment</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.Mensualidades</div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer mx-3">
+                                                <button type="button" class="btn btn-info text-white fw-bold" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Button delete -->
+                                <button type="button" class="border-0 bg-transparent btn btn-link" data-bs-toggle="modal" data-bs-target="#@idDeleteModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3 hover-effect" viewBox="0 0 16 16">
+                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+                                    </svg>
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id=@idDeleteModal tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header mx-3">
+                                                <h3 class="modal-title fw-bold" id="exampleModalLabel">Delete Package</h3>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body mx-3 text-start">
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold">Name</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.Nombre</div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold">Price per person</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.PrecioPorPersonaPorNoche</div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold">Down Payment Percentage</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.PrimaPorcentaje</div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label class="fw-bold">Monthly Payment</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.Mensualidades</div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer mx-3">
+                                                <button type="button" class="btn btn-info text-white fw-bold" data-bs-dismiss="modal">Cancel</button>
+                                                <form asp-action="Delete" asp-controller="Paquetes" method="post">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="id" value="@item.PaqueteID" />
+                                                    <button type="submit" class="btn btn-dark fw-bold">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

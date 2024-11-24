@@ -1,0 +1,63 @@
+﻿@model AppWebBeachSA.Models.Paquete
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body style="background-color:#413E3E">
+    <section class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="card shadow-lg d-flex flex-md-row border-0" style="border-radius: 1rem;">
+                        <div class="col-md-6 p-4">
+                            <div class="card-body text-black p-4">
+
+                                <form asp-action="Create">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                    <h2 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px;">Create a Package</h2>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Nombre" class="control-label">Name</label>
+                                        <input asp-for="Nombre" class="form-control" />
+                                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label asp-for="PrecioPorPersonaPorNoche" class="control-label">Price per person</label>
+                                        <input asp-for="PrecioPorPersonaPorNoche" class="form-control" />
+                                        <span asp-validation-for="PrecioPorPersonaPorNoche" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label asp-for="PrimaPorcentaje" class="control-label">Down Payment Percentage</label>
+                                        <input asp-for="PrimaPorcentaje" class="form-control" />
+                                        <span asp-validation-for="PrimaPorcentaje" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label asp-for="Mensualidades" class="control-label">Monthly Payment</label>
+                                        <input asp-for="Mensualidades" class="form-control" />
+                                        <span asp-validation-for="Mensualidades" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <input type="submit" value="Create" class="btn btn-dark form-control btn-lg" />
+                                    </div>
+
+                                    <div>
+                                        <a asp-action="Index" class="btn btn-info form-control text-white mt-3 btn-lg">Back to List</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-none d-md-block">
+                            <img src="https://www.designcontract.eu/wp-content/uploads/2017/01/1-768x711.jpg"
+                                 alt="Login Form" class="img-fluid w-100 h-100" style="border-radius: 0 1rem 1rem 0; object-fit: cover;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
