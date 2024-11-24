@@ -3,6 +3,7 @@ using AppWebBeachSA.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 
 namespace AppWebBeachSA.Controllers
@@ -220,6 +221,46 @@ namespace AppWebBeachSA.Controllers
                 return View(reservacion);
             }
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteBook(int id)
+        {
+            httpClient.DefaultRequestHeaders.Authorization = AutorizacionToken();
+
+            HttpResponseMessage response = await httpClient.DeleteAsync($"/Reservaciones/Eliminar?id={id}");
+
+            //se valida si durante la transaccion el token expiro
+            if (response.StatusCode.ToString().Equals($"Reservacion no eliminada, el id {id} no existe"))
+            {
+                return RedirectToAction("Login", "Usuarios");
+            }
+            else
+            {
+                TempData["Delete"] = "Reservation deleted correctly";
+                return Redirect(Url.Action("Index", "Clientes") + "#reservations");
+
+            }
+        }
+
+        private AuthenticationHeaderValue AutorizacionToken()
+        {
+            //se extrae el token almacenado dentro de la sesión
+            var token = HttpContext.Session.GetString("token");
+
+            //Variable para almacenar el token de autenticación
+            AuthenticationHeaderValue authentication = null;
+
+            if (token != null && token.Length != 0)
+            {
+                //Se almacena el token  otorgado por la API
+                authentication = new AuthenticationHeaderValue("Bearer", token);
+            }
+
+            //se retorna la información
+            return authentication;
         }
 
 

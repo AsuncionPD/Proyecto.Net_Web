@@ -1,4 +1,4 @@
-﻿@model AppWebBeachSA.Models.Reservacion 
+﻿@model AppWebBeachSA.Models.Reservacion
 
 
 @{
@@ -20,7 +20,7 @@
                 <!-- Campo para la fecha -->
                 <div class="mb-3">
                     <label for="fecha" asp-for="FechaReservacion" class="form-label">Fecha</label>
-                    <input type="date" class="form-control" id="fecha" asp-for="FechaReservacion"required>
+                    <input type="date" class="form-control" id="fecha" asp-for="FechaReservacion" required>
                 </div>
                 <!-- Campo para noches -->
                 <div class="mb-3">
@@ -56,7 +56,7 @@
                 <button type="submit" class="btn btn-primary">Reservar</button>
             </form>
         </div>
-       
+
     </div>
 </div>
 @if (TempData["TotalFinal"] != null)
@@ -69,107 +69,107 @@
                     <a href="@Url.Action("Index")" class="btn-close" aria-label="Close"></a>
                 </div>
                 <section class="d-flex align-items-center justify-content-center min-vh-100">
-                        <div class="row justify-content-center">
-                            <div class="col-md-10 col-lg-8">
-                                         <div class="card-body text-black">
-                                                <h1 class="text-center mb-4">Reservation</h1>
-                                                  <form asp-action="Create" method="post">
-                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="PaqueteID" class="control-label">Package</label>
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 col-lg-8">
+                            <div class="card-body text-black">
+                                <h1 class="text-center mb-4">Reservation</h1>
+                                <form asp-action="Create" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="PaqueteID" class="control-label">Package</label>
 
-                                                            <input asp-for="PaqueteID" class="form-control mt-2" />
+                                            <input asp-for="PaqueteID" class="form-control mt-2" />
 
-                                                            <span asp-validation-for="PaqueteID" class="text-danger"></span>
-                                                        </div>
+                                            <span asp-validation-for="PaqueteID" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="FechaReservacion" class="control-label">Reservation Date</label>
-                                                            <input asp-for="FechaReservacion" class="form-control mt-2" />
-                                                            <span asp-validation-for="FechaReservacion" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="FechaReservacion" class="control-label">Reservation Date</label>
+                                            <input asp-for="FechaReservacion" class="form-control mt-2" />
+                                            <span asp-validation-for="FechaReservacion" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="Noches" class="control-label">Nights</label>
-                                                            <input asp-for="Noches" class="form-control mt-2" />
-                                                            <span asp-validation-for="Noches" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Noches" class="control-label">Nights</label>
+                                            <input asp-for="Noches" class="form-control mt-2" />
+                                            <span asp-validation-for="Noches" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="Personas" class="control-label ">Number of People</label>
-                                                            <input asp-for="Personas" class="form-control mt-2" />
-                                                            <span asp-validation-for="Personas" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Personas" class="control-label ">Number of People</label>
+                                            <input asp-for="Personas" class="form-control mt-2" />
+                                            <span asp-validation-for="Personas" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="TotalSinDescuento" class="control-label ">Total Without Discount</label>
-                                                            <input asp-for="TotalSinDescuento" class="form-control mt-2" />
-                                                            <span asp-validation-for="TotalSinDescuento" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="TotalSinDescuento" class="control-label ">Total Without Discount</label>
+                                            <input asp-for="TotalSinDescuento" class="form-control mt-2" />
+                                            <span asp-validation-for="TotalSinDescuento" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="DescuentoPorcentaje" class="control-label ">Discount Percentage</label>
-                                                            <input asp-for="DescuentoPorcentaje" class="form-control mt-2" />
-                                                            <span asp-validation-for="DescuentoPorcentaje" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="DescuentoPorcentaje" class="control-label ">Discount Percentage</label>
+                                            <input asp-for="DescuentoPorcentaje" class="form-control mt-2" />
+                                            <span asp-validation-for="DescuentoPorcentaje" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="TotalConDescuento" class="control-label ">Total With Discount</label>
-                                                            <input asp-for="TotalConDescuento" class="form-control mt-2" />
-                                                            <span asp-validation-for="TotalConDescuento" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="TotalConDescuento" class="control-label ">Total With Discount</label>
+                                            <input asp-for="TotalConDescuento" class="form-control mt-2" />
+                                            <span asp-validation-for="TotalConDescuento" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="FormaPago" class="control-label ">Payment Method</label>
-                                                            <input asp-for="FormaPago" class="form-control mt-2" />
-                                                            <span asp-validation-for="FormaPago" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="FormaPago" class="control-label ">Payment Method</label>
+                                            <input asp-for="FormaPago" class="form-control mt-2" />
+                                            <span asp-validation-for="FormaPago" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="NumeroCheque" class="control-label ">Check Number</label>
-                                                            <input asp-for="NumeroCheque" class="form-control mt-2" />
-                                                            <span asp-validation-for="NumeroCheque" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="NumeroCheque" class="control-label ">Check Number</label>
+                                            <input asp-for="NumeroCheque" class="form-control mt-2" />
+                                            <span asp-validation-for="NumeroCheque" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="Banco" class="control-label ">Bank</label>
-                                                            <input asp-for="Banco" class="form-control mt-2" />
-                                                            <span asp-validation-for="Banco" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Banco" class="control-label ">Bank</label>
+                                            <input asp-for="Banco" class="form-control mt-2" />
+                                            <span asp-validation-for="Banco" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="Prima" class="control-label ">Down Payment</label>
-                                                            <input asp-for="Prima" class="form-control mt-2" />
-                                                            <span asp-validation-for="Prima" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Prima" class="control-label ">Down Payment</label>
+                                            <input asp-for="Prima" class="form-control mt-2" />
+                                            <span asp-validation-for="Prima" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="RestoEnMensualidades" class="control-label ">Remaining in Monthly Payments</label>
-                                                            <input asp-for="RestoEnMensualidades" class="form-control mt-2" />
-                                                            <span asp-validation-for="RestoEnMensualidades" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="RestoEnMensualidades" class="control-label ">Remaining in Monthly Payments</label>
+                                            <input asp-for="RestoEnMensualidades" class="form-control mt-2" />
+                                            <span asp-validation-for="RestoEnMensualidades" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="TipoCambio" class="control-label ">Exchange Rate</label>
-                                                            <input asp-for="TipoCambio" class="form-control mt-2" />
-                                                            <span asp-validation-for="TipoCambio" class="text-danger"></span>
-                                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="TipoCambio" class="control-label ">Exchange Rate</label>
+                                            <input asp-for="TipoCambio" class="form-control mt-2" />
+                                            <span asp-validation-for="TipoCambio" class="text-danger"></span>
+                                        </div>
 
-                                                        <div class="form-group col-md-6">
-                                                            <label asp-for="TotalUSD" class="control-label ">Total in USD</label>
-                                                            <input asp-for="TotalUSD" class="form-control mt-2" />
-                                                            <span asp-validation-for="TotalUSD" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group mt-3">
-                                                        <input type="submit" value="Create" class="btn btn-dark btn-lg w-100" />
-                                                    </div>
-                                                    <div>
-                                                        <a style="background-color:#b8860b;" class="btn w-100 mt-3 text-white" asp-action="Index" asp-controller="Clientes">Back to List</a>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="TotalUSD" class="control-label ">Total in USD</label>
+                                            <input asp-for="TotalUSD" class="form-control mt-2" />
+                                            <span asp-validation-for="TotalUSD" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <input type="submit" value="Create" class="btn btn-dark btn-lg w-100" />
+                                    </div>
+                                    <div>
+                                        <a style="background-color:#b8860b;" class="btn w-100 mt-3 text-white" asp-action="Index" asp-controller="Clientes">Back to List</a>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </section>
