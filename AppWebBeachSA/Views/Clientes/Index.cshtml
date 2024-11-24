@@ -217,13 +217,13 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <a href="index.html">
+                                    <a asp-action="paquete" asp-controller="Reservaciones" asp-route-id="@item.PaqueteID">
                                         <p class="text-decoration-underline text-white m-0 mt-2">Browse Now</p>
                                     </a>
                                 </div>
                             </div>
                             <div class="room-content text-center mt-3">
-                                @Html.ActionLink($"{@item.Nombre}", "paquete", new { id = item.PaqueteID }, new { @class = " display-6 fw-normal text-darkgoldenrod text-decoration-none" })
+                                @Html.ActionLink($"{@item.Nombre}", "paquete", new { id = item.PaqueteID, controller = "Reservaciones" }, new { @class = " display-6 fw-normal text-darkgoldenrod text-decoration-none" })
                                 <p class="text-darkgoldenrod"><span class="text-black fs-4">@item.PrecioPorPersonaPorNoche</span>/person</p>
                             </div>
                         </div>
