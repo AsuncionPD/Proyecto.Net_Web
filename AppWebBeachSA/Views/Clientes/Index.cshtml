@@ -1,0 +1,600 @@
+﻿@model IEnumerable<AppWebBeachSA.Models.Reservacion>
+
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/landing.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AppWebBeachSA.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/imgs/Home.jpg" style="background-size: cover;">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" asp-append-version="true" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" asp-append-version="true">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .hero {
+            background: url(https://www.vivaplaya.net/viva/wp-content/uploads/2022/04/amanecer-playa-del-carmen-viva-playa.jpg) no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+            .hero h1, .hero p, .hero a {
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+
+            .hero:hover h1 {
+                transform: scale(1.05);
+            }
+
+        .room-item:hover img {
+            transform: scale(1.1);
+            transition: transform 0.5s ease;
+        }
+
+        .service:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        .room-item {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: none;
+            outline: none;
+            border-radius: 0;
+            overflow: hidden;
+            padding: 15px;
+            background-color: transparent;
+            box-shadow: none;
+        }
+
+            .room-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 0px;
+            }
+
+        .product-description {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border-radius: 10px;
+        }
+
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            }
+
+    </style>
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol xmlns="http://www.w3.org/2000/svg" id="plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="minus" viewBox="0 0 16 16">
+            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+        </symbol>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="wifi" viewBox="0 0 24 24">
+            <path fill="darkgoldenrod"
+                  d="M6.55 12.192c3.017-3.256 7.883-3.256 10.9 0a.75.75 0 1 0 1.1-1.02c-3.61-3.896-9.49-3.896-13.1 0a.75.75 0 1 0 1.1 1.02" />
+            <path fill="darkgoldenrod"
+                  d="M8.55 14.35c1.912-2.064 4.987-2.064 6.9 0a.75.75 0 1 0 1.1-1.019c-2.506-2.705-6.594-2.705-9.1 0a.75.75 0 1 0 1.1 1.02" />
+            <path fill="darkgoldenrod"
+                  d="M10.55 16.51c.808-.872 2.092-.872 2.9 0a.75.75 0 1 0 1.1-1.02c-1.401-1.513-3.699-1.513-5.1 0a.75.75 0 1 0 1.1 1.02" />
+            <path fill="darkgoldenrod" fill-rule="evenodd"
+                  d="M12 1.25c-.708 0-1.351.203-2.05.542c-.674.328-1.454.812-2.427 1.416L5.456 4.491c-.92.572-1.659 1.03-2.227 1.465c-.589.45-1.041.91-1.368 1.507c-.326.595-.472 1.229-.543 1.978c-.068.725-.068 1.613-.068 2.726v1.613c0 1.904 0 3.407.153 4.582c.156 1.205.486 2.178 1.23 2.947c.747.773 1.697 1.119 2.875 1.282c1.14.159 2.598.159 4.434.159h4.116c1.836 0 3.294 0 4.434-.159c1.177-.163 2.128-.509 2.876-1.282c.743-.769 1.073-1.742 1.23-2.947c.152-1.175.152-2.678.152-4.582v-1.613c0-1.113 0-2-.068-2.726c-.07-.75-.217-1.383-.543-1.978c-.327-.597-.78-1.056-1.368-1.507c-.568-.436-1.306-.893-2.227-1.465l-2.067-1.283c-.973-.604-1.753-1.088-2.428-1.416c-.697-.34-1.34-.542-2.049-.542M8.28 4.504c1.015-.63 1.73-1.072 2.327-1.363c.581-.283.993-.391 1.393-.391s.812.108 1.393.391c.598.29 1.312.733 2.327 1.363l2 1.241c.961.597 1.636 1.016 2.14 1.402c.489.375.77.684.963 1.036c.193.353.306.766.365 1.398c.061.648.062 1.465.062 2.623v1.521c0 1.97-.002 3.376-.14 4.443c-.136 1.048-.393 1.656-.82 2.099c-.425.439-1.003.7-2.004.839c-1.026.142-2.379.144-4.286.144h-4c-1.908 0-3.26-.002-4.286-.144c-1.001-.14-1.579-.4-2.003-.84c-.428-.442-.685-1.05-.82-2.098c-.14-1.067-.141-2.472-.141-4.443v-1.521c0-1.158 0-1.975.062-2.623c.059-.632.172-1.045.365-1.398c.193-.352.474-.661.964-1.036c.503-.386 1.178-.805 2.139-1.402z"
+                  clip-rule="evenodd" />
+        </symbol>
+        <symbol id="armchair" viewBox="0 0 24 24">
+            <path fill="darkgoldenrod" fill-rule="evenodd"
+                  d="M10.749 3.25h2.502c1.088 0 1.976 0 2.678.09c.73.093 1.37.296 1.885.786c.52.496.74 1.12.84 1.833c.096.675.096 1.527.096 2.557v1.057c.4-.21.857-.323 1.323-.323c1.708 0 3.17 1.557 2.53 3.277l-1.12 3l-.023.062c-.173.463-.291.78-.452 1.059c-.498.858-1.309 1.497-2.258 1.833V20a.75.75 0 0 1-1.5 0v-1.254c-.188.004-.4.004-.655.004H6.75V20a.75.75 0 0 1-1.5 0v-1.333a.75.75 0 0 1 .021-.179c-1.14-.398-2.086-1.231-2.527-2.354l-.04-.108l-1.306-3.5c-.642-1.719.82-3.276 2.529-3.276c.466 0 .922.113 1.323.323V8.516c0-1.03 0-1.882.095-2.557c.1-.713.32-1.337.84-1.833c.516-.49 1.156-.693 1.886-.786c.702-.09 1.59-.09 2.678-.09M5.25 11.928V12h.03l.86 2.122l.02.049c.08.196.162.4.289.577c.288.4.724.664 1.199.76c.207.043.427.042.666.042h7.139c.46.001.891.002 1.271-.155c.207-.085.399-.204.566-.355c.316-.286.476-.683.63-1.066l.037-.092l.764-1.882h.03v-.072l.207-.512c.147-.362.57-.666 1.115-.666c.92 0 1.314.743 1.124 1.252l-1.12 3c-.204.55-.278.74-.367.894c-.397.685-1.159 1.193-2.079 1.322c-.212.03-.458.032-1.098.032H6.776c-1.237-.018-2.265-.72-2.636-1.665a6.26 6.26 0 0 1-.034-.09l-1.303-3.493c-.19-.509.204-1.252 1.124-1.252c.546 0 .968.304 1.115.666zm12-.292V8.57c0-1.1-.002-1.845-.08-2.403c-.076-.532-.208-.782-.39-.955c-.188-.18-.465-.312-1.042-.385c-.595-.077-1.386-.078-2.538-.078h-2.4c-1.152 0-1.943.001-2.538.078c-.577.073-.854.206-1.042.385c-.182.173-.314.423-.39.955c-.078.558-.08 1.304-.08 2.403v3.065l.78 1.922c.053.13.083.203.108.259a.502.502 0 0 0 .028.055c.05.07.145.14.28.167c.04.007.095.011.422.011h6.979c.637 0 .738-.014.806-.042a.453.453 0 0 0 .131-.081c.002-.001.022-.017.069-.11a6.79 6.79 0 0 0 .214-.499z"
+                  clip-rule="evenodd" />
+        </symbol>
+        <symbol id="dumbbells" viewBox="0 0 24 24">
+            <path fill="darkgoldenrod" fill-rule="evenodd"
+                  d="m4.929 1.53l.049.007c.288.04.542.075.753.12c.224.048.452.118.67.252c.482.297.82.777.958 1.324c.069.274.05.636.03.906l-.024.257l4.657.648l.035-.228c.044-.266.112-.623.247-.874a2.103 2.103 0 0 1 1.263-1.034c.247-.071.486-.076.714-.06c.214.013.469.049.757.089l.048.007c.288.04.543.075.753.12c.225.048.452.117.67.251c.482.298.82.778.958 1.324c.061.243.066.48.052.715c-.012.224-.045.492-.083.804l-.35 2.885c-.037.311-.07.58-.111.8c-.043.23-.104.46-.223.681a2.103 2.103 0 0 1-1.263 1.035a2.043 2.043 0 0 1-.714.06c-.214-.014-.468-.05-.756-.09l-.05-.006c-.287-.04-.542-.076-.752-.12a2.071 2.071 0 0 1-.67-.252a2.172 2.172 0 0 1-.958-1.324c-.07-.275-.05-.636-.03-.907c.007-.082.014-.169.023-.257l-4.656-.648l-.036.229c-.044.266-.112.623-.246.873a2.103 2.103 0 0 1-1.264 1.035a2.044 2.044 0 0 1-.713.06c-.214-.014-.47-.05-.757-.09l-.049-.006c-.288-.04-.543-.075-.753-.12a2.072 2.072 0 0 1-.67-.252a2.173 2.173 0 0 1-.958-1.323a2.334 2.334 0 0 1-.052-.715c.013-.224.045-.492.083-.804l.35-2.885c.038-.312.07-.58.112-.8c.043-.23.104-.46.222-.681A2.103 2.103 0 0 1 3.458 1.5c.247-.071.486-.075.714-.06c.214.014.469.05.757.09m-.855 1.407a.63.63 0 0 0-.2.005a.604.604 0 0 0-.357.303a.878.878 0 0 0-.07.247c-.031.167-.058.388-.1.728l-.344 2.84c-.041.34-.068.56-.077.731a.85.85 0 0 0 .009.263a.674.674 0 0 0 .29.413a.648.648 0 0 0 .197.062c.15.032.35.06.67.105c.32.044.52.072.673.082a.63.63 0 0 0 .199-.005a.603.603 0 0 0 .354-.296c0-.002.012-.03.029-.097c.02-.08.042-.188.064-.32c.044-.265.083-.585.123-.92a.75.75 0 0 1 .848-.653l6.132.854a.75.75 0 0 1 .64.833c-.04.335-.078.654-.099.923a4.13 4.13 0 0 0-.015.328c0 .074.006.104.005.104a.673.673 0 0 0 .289.407a.647.647 0 0 0 .197.061c.15.033.35.06.67.105c.32.045.52.072.673.082a.63.63 0 0 0 .199-.005a.604.604 0 0 0 .358-.302a.874.874 0 0 0 .07-.247c.03-.168.058-.388.099-.728L15.944 6c.042-.34.068-.561.078-.732a.826.826 0 0 0-.01-.262a.674.674 0 0 0-.29-.413a.647.647 0 0 0-.197-.062c-.15-.032-.35-.06-.67-.105c-.32-.045-.52-.072-.672-.082a.63.63 0 0 0-.2.005a.603.603 0 0 0-.354.295c0 .003-.011.03-.028.097a4.13 4.13 0 0 0-.064.32a22.38 22.38 0 0 0-.124.92a.75.75 0 0 1-.848.653l-6.131-.853a.75.75 0 0 1-.641-.833c.04-.336.079-.655.1-.924c.01-.133.015-.243.014-.327c0-.074-.005-.104-.005-.105a.672.672 0 0 0-.288-.406a.648.648 0 0 0-.197-.062c-.15-.032-.35-.06-.67-.105a10.5 10.5 0 0 0-.673-.082m15.123 9.309c-.15.032-.345.087-.657.177c-.311.089-.506.145-.652.199a.672.672 0 0 0-.192.091a.706.706 0 0 0-.243.455s0 .03.009.105c.01.084.028.191.054.322c.054.264.132.574.213.901a.75.75 0 0 1-.52.903l-5.973 1.714a.75.75 0 0 1-.934-.539c-.082-.327-.16-.637-.236-.894a4.041 4.041 0 0 0-.103-.307a.73.73 0 0 0-.04-.09a.57.57 0 0 0-.375-.234a.627.627 0 0 0-.197.023c-.15.032-.346.087-.657.177c-.311.089-.507.145-.652.199a.67.67 0 0 0-.192.091a.707.707 0 0 0-.244.462a.901.901 0 0 0 .024.262c.03.167.083.382.166.713l.692 2.767c.083.331.137.546.189.707c.05.155.082.209.097.23a.572.572 0 0 0 .381.243c.01.001.054.006.198-.024c.15-.031.346-.087.657-.176c.311-.09.506-.146.652-.2a.672.672 0 0 0 .192-.091a.707.707 0 0 0 .243-.455s0-.03-.008-.105a4.093 4.093 0 0 0-.055-.322a22.309 22.309 0 0 0-.213-.9a.75.75 0 0 1 .52-.904l5.973-1.714a.75.75 0 0 1 .934.539c.082.327.16.637.236.894c.038.128.073.23.103.308c.024.06.038.086.04.09a.57.57 0 0 0 .375.234c.01.001.054.006.197-.024c.15-.031.346-.087.657-.176c.312-.09.507-.146.652-.2a.67.67 0 0 0 .193-.091a.707.707 0 0 0 .243-.462a.9.9 0 0 0-.023-.262a13.097 13.097 0 0 0-.167-.713l-.692-2.767a12.78 12.78 0 0 0-.189-.706a.854.854 0 0 0-.097-.231a.571.571 0 0 0-.381-.242a.631.631 0 0 0-.198.023m-.308-1.468a2.04 2.04 0 0 1 .715-.04a2.064 2.064 0 0 1 1.698 1.501c.068.212.133.474.21.777l.702 2.81c.076.304.142.566.182.786c.042.232.067.467.037.716a2.206 2.206 0 0 1-.78 1.437a2.1 2.1 0 0 1-.628.34c-.203.075-.45.146-.731.227l-.048.013c-.28.08-.528.152-.738.196a2.043 2.043 0 0 1-.716.041a2.07 2.07 0 0 1-1.39-.854c-.167-.231-.279-.578-.355-.835l-.06-.207l-4.54 1.303c.02.09.04.177.057.262c.054.265.117.621.082.902a2.206 2.206 0 0 1-.78 1.438a2.096 2.096 0 0 1-.628.34c-.202.075-.45.146-.73.227l-.048.013c-.28.08-.528.152-.739.196a2.043 2.043 0 0 1-.715.041a2.07 2.07 0 0 1-1.391-.854a2.275 2.275 0 0 1-.307-.648c-.068-.212-.133-.474-.21-.777l-.702-2.81c-.076-.304-.142-.566-.182-.786a2.335 2.335 0 0 1-.037-.715a2.206 2.206 0 0 1 .78-1.437c.197-.162.413-.262.628-.341c.203-.075.45-.146.732-.226l.047-.014c.28-.08.528-.152.738-.196a2.04 2.04 0 0 1 .716-.04a2.07 2.07 0 0 1 1.39.853c.167.232.279.579.355.835l.06.207l4.54-1.303c-.02-.09-.04-.177-.056-.261c-.055-.266-.118-.622-.083-.903a2.206 2.206 0 0 1 .78-1.437a2.1 2.1 0 0 1 .628-.341c.202-.075.45-.146.73-.226l.048-.014c.28-.08.529-.152.739-.196"
+                  clip-rule="evenodd" />
+        </symbol>
+        <symbol id="swimming" viewBox="0 0 24 24">
+            <path fill="darkgoldenrod" fill-rule="evenodd"
+                  d="M17 3.75a1.75 1.75 0 1 0 0 3.5a1.75 1.75 0 0 0 0-3.5M13.75 5.5a3.25 3.25 0 1 1 6.5 0a3.25 3.25 0 0 1-6.5 0m-5.31-.87a.671.671 0 0 0-1.013.881l.988 1.152a2.25 2.25 0 0 1-.551 3.394l-3.477 2.086a.75.75 0 1 1-.772-1.286L7.091 8.77a.75.75 0 0 0 .184-1.131l-.988-1.153a2.171 2.171 0 0 1 3.276-2.849l6.5 7.366a.75.75 0 1 1-1.125.992zm-3.87 8.236c.687-1.074 2.157-1.039 2.888-.104c.99 1.267 2.372 2.488 4.542 2.488c2.209 0 3.57-.979 4.505-2.23c.72-.961 2.286-1.119 3.04.024c.626.945 1.304 1.687 2.627 1.998a.75.75 0 1 1-.344 1.46c-1.852-.436-2.807-1.533-3.534-2.631a.28.28 0 0 0-.253-.128a.432.432 0 0 0-.335.176C16.54 15.48 14.76 16.75 12 16.75c-2.842 0-4.611-1.64-5.724-3.065a.304.304 0 0 0-.246-.125a.23.23 0 0 0-.196.114c-.74 1.156-1.695 2.365-3.662 2.828a.75.75 0 1 1-.344-1.46c1.401-.33 2.08-1.14 2.742-2.176m0 5c.687-1.074 2.157-1.039 2.888-.104c.99 1.267 2.372 2.488 4.542 2.488c2.209 0 3.57-.979 4.505-2.23c.72-.962 2.286-1.119 3.04.024c.626.945 1.304 1.687 2.627 1.998a.75.75 0 1 1-.344 1.46c-1.852-.436-2.807-1.533-3.534-2.631a.28.28 0 0 0-.253-.128a.432.432 0 0 0-.335.177C16.54 20.48 14.76 21.75 12 21.75c-2.842 0-4.611-1.64-5.724-3.065a.304.304 0 0 0-.246-.125a.23.23 0 0 0-.196.114c-.74 1.156-1.695 2.365-3.662 2.828a.75.75 0 1 1-.344-1.46c1.401-.33 2.08-1.14 2.742-2.176"
+                  clip-rule="evenodd" />
+        </symbol>
+        <symbol id="chef-hat" viewBox="0 0 24 24">
+            <g fill="none">
+                <path fill="darkgoldenrod"
+                      d="M19 18h.75zM5 14.584h.75a.75.75 0 0 0-.45-.687zm14 0l-.3-.687a.75.75 0 0 0-.45.687zM15.75 7a.75.75 0 0 0 1.5 0zm-9 0a.75.75 0 0 0 1.5 0zM7 4.25A5.75 5.75 0 0 0 1.25 10h1.5A4.25 4.25 0 0 1 7 5.75zm10 1.5A4.25 4.25 0 0 1 21.25 10h1.5A5.75 5.75 0 0 0 17 4.25zm-2 15.5H9v1.5h6zm-6 0c-.964 0-1.612-.002-2.095-.067c-.461-.062-.659-.169-.789-.3l-1.06 1.062c.455.455 1.022.64 1.65.725c.606.082 1.372.08 2.294.08zM4.25 18c0 .922-.002 1.688.08 2.294c.084.628.27 1.195.725 1.65l1.061-1.06c-.13-.13-.237-.328-.3-.79c-.064-.482-.066-1.13-.066-2.094zm14 0c0 .964-.002 1.612-.067 2.095c-.062.461-.169.659-.3.789l1.062 1.06c.455-.455.64-1.022.725-1.65c.082-.606.08-1.372.08-2.294zM15 22.75c.922 0 1.688.002 2.294-.08c.628-.084 1.195-.27 1.65-.726l-1.06-1.06c-.13.13-.328.237-.79.3c-.482.064-1.13.066-2.094.066zm-8-17c.214 0 .423.016.628.046l.219-1.484A5.792 5.792 0 0 0 7 4.25zm5-4.5a5.252 5.252 0 0 0-4.973 3.563l1.42.482A3.752 3.752 0 0 1 12 2.75zM7.027 4.813A5.245 5.245 0 0 0 6.75 6.5h1.5c0-.423.07-.828.198-1.205zM17 4.25c-.287 0-.57.021-.847.062l.22 1.484A4.29 4.29 0 0 1 17 5.75zm-5-1.5a3.752 3.752 0 0 1 3.552 2.545l1.42-.482A5.252 5.252 0 0 0 12 1.25zm3.552 2.545c.128.377.198.782.198 1.205h1.5c0-.589-.097-1.156-.277-1.687zM5.75 18v-3.416h-1.5V18zm-.45-4.103A4.251 4.251 0 0 1 2.75 10h-1.5a5.751 5.751 0 0 0 3.45 5.271zm12.95.687V18h1.5v-3.416zm3-4.584a4.251 4.251 0 0 1-2.55 3.897l.6 1.374A5.751 5.751 0 0 0 22.75 10zm-5.5-3.5V7h1.5v-.5zm-9 0V7h1.5v-.5z" />
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 18h14" />
+            </g>
+        </symbol>
+        <symbol id="meditation" viewBox="0 0 24 24">
+            <path fill="darkgoldenrod" fill-rule="evenodd"
+                  d="M12 2.75a1.75 1.75 0 1 0 0 3.5a1.75 1.75 0 0 0 0-3.5M8.75 4.5a3.25 3.25 0 1 1 6.5 0a3.25 3.25 0 0 1-6.5 0M12 9.77a5.9 5.9 0 0 0-.86.052l-.892.15c-2.013.339-3.498 2.102-3.498 4.178a3.25 3.25 0 0 1-1.43 2.696l-.1.069a3.43 3.43 0 0 1-.823.406l-1.157.39a.75.75 0 0 1-.48-1.422l1.159-.39c.163-.055.319-.132.462-.228l.102-.069a1.75 1.75 0 0 0 .767-1.452c0-2.797 2.003-5.195 4.748-5.657l.89-.15A7.273 7.273 0 0 1 12 8.271a7.255 7.255 0 0 1 1.112.072l.89.15c2.746.462 4.748 2.86 4.748 5.657c0 .586.29 1.13.768 1.452l.101.069c.144.096.3.173.463.228l1.158.39a.75.75 0 0 1-.48 1.422l-1.157-.39a3.429 3.429 0 0 1-.822-.406l-.101-.069a3.25 3.25 0 0 1-1.43-2.696c0-2.076-1.485-3.839-3.497-4.178l-.892-.15a5.886 5.886 0 0 0-.86-.051m-3.1 5.78a.75.75 0 1 1 1.2.9l-.924 1.233l-.022.029a4.531 4.531 0 0 1-.34.42a2.75 2.75 0 0 1-1.007.67c-.155.058-.316.098-.52.15l-.035.008l-1.794.449a.935.935 0 0 0 .227 1.841h.684c1.546 0 3.05-.501 4.287-1.429L12.55 18.4a.75.75 0 1 1 .9 1.2l-.904.678l.491.185c.534.2.775.29 1.017.366a9.252 9.252 0 0 0 2.243.407c.253.014.51.014 1.08.014h.939a.935.935 0 0 0 .226-1.841l-1.473-.369a96.02 96.02 0 0 0-.082-.02c-.476-.119-.851-.212-1.186-.406a2.73 2.73 0 0 1-.29-.192c-.308-.234-.54-.543-.833-.936l-.051-.067l-.727-.969a.75.75 0 1 1 1.2-.9l.727.969c.368.491.471.618.591.709c.042.031.086.06.132.087c.13.075.287.121.883.27l1.473.368a2.435 2.435 0 0 1-.59 4.797h-.963c-.539 0-.84 0-1.14-.017a10.753 10.753 0 0 1-2.607-.473c-.286-.09-.567-.195-1.072-.384l-1.432-.537a8.645 8.645 0 0 1-4.733 1.411h-.684a2.435 2.435 0 0 1-.59-4.797l1.793-.448c.255-.064.324-.082.384-.105c.173-.066.33-.17.458-.304c.044-.047.088-.102.246-.313z"
+                  clip-rule="evenodd" />
+        </symbol>
+        <symbol id="calendar" viewBox="0 0 24 24">
+            <path fill="darkgoldenrod"
+                  d="M17 14a1 1 0 1 0 0-2a1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2a1 1 0 0 0 0 2m-4-5a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-6-3a1 1 0 1 0 0-2a1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2a1 1 0 0 0 0 2" />
+            <path fill="darkgoldenrod" fill-rule="evenodd"
+                  d="M7 1.75a.75.75 0 0 1 .75.75v.763c.662-.013 1.391-.013 2.193-.013h4.113c.803 0 1.532 0 2.194.013V2.5a.75.75 0 0 1 1.5 0v.827c.26.02.506.045.739.076c1.172.158 2.121.49 2.87 1.238c.748.749 1.08 1.698 1.238 2.87c.153 1.14.153 2.595.153 4.433v2.112c0 1.838 0 3.294-.153 4.433c-.158 1.172-.49 2.121-1.238 2.87c-.749.748-1.698 1.08-2.87 1.238c-1.14.153-2.595.153-4.433.153H9.945c-1.838 0-3.294 0-4.433-.153c-1.172-.158-2.121-.49-2.87-1.238c-.748-.749-1.08-1.698-1.238-2.87c-.153-1.14-.153-2.595-.153-4.433v-2.112c0-1.838 0-3.294.153-4.433c.158-1.172.49-2.121 1.238-2.87c.749-.748 1.698-1.08 2.87-1.238c.233-.031.48-.056.739-.076V2.5A.75.75 0 0 1 7 1.75M5.71 4.89c-1.005.135-1.585.389-2.008.812c-.423.423-.677 1.003-.812 2.009c-.023.17-.042.35-.058.539h18.336c-.016-.19-.035-.369-.058-.54c-.135-1.005-.389-1.585-.812-2.008c-.423-.423-1.003-.677-2.009-.812c-1.027-.138-2.382-.14-4.289-.14h-4c-1.907 0-3.261.002-4.29.14M2.75 12c0-.854 0-1.597.013-2.25h18.474c.013.653.013 1.396.013 2.25v2c0 1.907-.002 3.262-.14 4.29c-.135 1.005-.389 1.585-.812 2.008c-.423.423-1.003.677-2.009.812c-1.027.138-2.382.14-4.289.14h-4c-1.907 0-3.261-.002-4.29-.14c-1.005-.135-1.585-.389-2.008-.812c-.423-.423-.677-1.003-.812-2.009c-.138-1.027-.14-2.382-.14-4.289z"
+                  clip-rule="evenodd" />
+        </symbol>
+        <symbol id="arrow-right" viewBox="0 0 24 24">
+            <path fill="darkgoldenrod" fill-rule="evenodd"
+                  d="M13.47 5.47a.75.75 0 0 1 1.06 0l6 6a.75.75 0 0 1 0 1.06l-6 6a.75.75 0 1 1-1.06-1.06l4.72-4.72H4a.75.75 0 0 1 0-1.5h14.19l-4.72-4.72a.75.75 0 0 1 0-1.06"
+                  clip-rule="evenodd" />
+        </symbol>
+        <symbol id="arrow-left" viewBox="0 0 24 24">
+            <path fill="darkgoldenrod" fill-rule="evenodd"
+                  d="M10.53 5.47a.75.75 0 0 1 0 1.06l-4.72 4.72H20a.75.75 0 0 1 0 1.5H5.81l4.72 4.72a.75.75 0 1 1-1.06 1.06l-6-6a.75.75 0 0 1 0-1.06l6-6a.75.75 0 0 1 1.06 0"
+                  clip-rule="evenodd" />
+        </symbol>
+
+        <symbol xmlns="http://www.w3.org/2000/svg" id="plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="minus" viewBox="0 0 16 16">
+            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+        </symbol>
+    </svg>
+
+    <header class="hero">
+        <div class="text-center text-black mb-lg-5">
+            <h1 class="display-5" data-aos="zoom-in">Welcome to Hotel Beach</h1>
+            <p class="lead" data-aos="fade-up" data-aos-delay="200">Discover luxury, comfort, and unforgettable experiences.</p>
+            <a href="#services" class="btn btn-primary btn-lg" data-aos="zoom-in" data-aos-delay="400">Explore More</a>
+        </div>
+    </header>
+
+    <section id="room" class="padding-medium">
+        <div class="container-fluid padding-side" data-aos="fade-up">
+
+            <h4 class="display-3 fw-normal text-center mt-3">Explore our packages</h4>
+            <div class="swiper room-swiper mt-5">
+                <div class="swiper-wrapper">
+                    @for (int i = 0; i < ViewBag.Paquetes.Count; i++)
+                    {
+                        var item = ViewBag.Paquetes[i];
+                        var image = i + "Room.jpg";
+
+                        <div class="swiper-slide">
+                            <div class="room-item position-relative rounded-5 overflow-hidden">
+                                <img src="~/imgs/@image" alt="img" class="post-image img-fluid rounded-4">
+                                <div class="product-description position-absolute p-5 text-start justify-content-center">
+                                    <h4 class="display-6 fw-normal text-white">@item.Nombre</h4>
+
+                                    <table>
+                                        <tbody>
+                                            <tr class="text-white">
+                                                <td class="pe-2">Price:</td>
+                                                <td class="price">@item.PrecioPorPersonaPorNoche /Per persont</td>
+                                            </tr>
+                                            <tr class="text-white">
+                                                <td class="pe-2">Percentage:</td>
+                                                <td>@item.PrimaPorcentaje</td>
+                                            </tr>
+                                            <tr class="text-white">
+                                                <td class="pe-2">Monthly payments</td>
+                                                <td>@item.Mensualidades</td>
+                                            </tr>
+                                            <tr class="text-white">
+                                                <td class="pe-2">Services:</td>
+                                                <td>Wifi, Television, Bathroom,...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a href="index.html">
+                                        <p class="text-decoration-underline text-white m-0 mt-2">Browse Now</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="room-content text-center mt-3">
+                                @Html.ActionLink($"{@item.Nombre}", "paquete", new { id = item.PaqueteID }, new { @class = " display-6 fw-normal text-darkgoldenrod text-decoration-none" })
+                                <p class="text-darkgoldenrod"><span class="text-black fs-4">@item.PrecioPorPersonaPorNoche</span>/person</p>
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+                <div class="swiper-pagination room-pagination position-relative mt-5"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="reservations" class="py-5">
+        <div class="container">
+            <h4 class="display-3 fw-normal text-center mt-3" data-aos="fade-up">My Reservations</h4>
+            <div class="row g-4 mt-3">
+                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <img src="https://via.placeholder.com/400x200" class="card-img-top rounded-top-4" alt="Room Image">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Deluxe Room</h5>
+                            <p class="card-text text-muted mb-1">
+                                <i class="bi bi-calendar-check me-2"></i><strong>Check-in:</strong> 2024-12-01
+                            </p>
+                            <p class="card-text text-muted mb-3">
+                                <i class="bi bi-calendar-x me-2"></i><strong>Check-out:</strong> 2024-12-05
+                            </p>
+                            <p class="card-text">
+                                <i class="bi bi-person-fill me-2"></i><strong>Guests:</strong> 2 Adults, 1 Child
+                            </p>
+                            <div class="d-flex justify-content-between mt-4">
+                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
+                                    <i class="bi bi-eye me-2"></i>View
+                                </button>
+                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
+                                    <i class="bi bi-pencil me-2"></i>Modify
+                                </button>
+                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
+                                    <i class="bi bi-trash me-2"></i>Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <img src="https://via.placeholder.com/400x200" class="card-img-top rounded-top-4" alt="Room Image">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Ocean View Suite</h5>
+                            <p class="card-text text-muted mb-1">
+                                <i class="bi bi-calendar-check me-2"></i><strong>Check-in:</strong> 2024-12-10
+                            </p>
+                            <p class="card-text text-muted mb-3">
+                                <i class="bi bi-calendar-x me-2"></i><strong>Check-out:</strong> 2024-12-15
+                            </p>
+                            <p class="card-text">
+                                <i class="bi bi-person-fill me-2"></i><strong>Guests:</strong> 3 Adults
+                            </p>
+                            <div class="d-flex justify-content-between mt-4">
+                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
+                                    <i class="bi bi-eye me-2"></i>View
+                                </button>
+                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
+                                    <i class="bi bi-pencil me-2"></i>Modify
+                                </button>
+                                <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
+                                    <i class="bi bi-trash me-2"></i>Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up" style="display: none;" id="no-reservations">
+                <p class="text-muted">You have no reservations at the moment.</p>
+                <a href="#services" class="btn btn-outline-primary">Explore Our Rooms</a>
+            </div>
+
+            <div class="text-center mt-4" data-aos="fade-up">
+                <button class="btn btn-dark btn-lg px-5">
+                    <i class="bi bi-plus-circle me-2"></i>Create a Reservation
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="about-us" class="padding-large mt-3">
+        <div class="container-fluid padding-side" data-aos="fade-up">
+            <h3 class="display-3 text-center fw-normal">Hotel Beach: Your</h3>
+            <h3 class="display-3 text-center fw-normal">Gateway to Serenity</h3>
+
+            <div class="row align-items-start mt-5 mt-lg-5">
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <p>
+                            Welcome to Hotel Beach, where comfort meets tranquility. Puntarenas in the heart of a bustling city, our
+                            hotel offers a peaceful retreat for both business and leisure travelers. With modern amenities, and a
+                            warm, inviting atmosphere, we strive to make your stay with us.
+                        </p>
+                        <a asp-controller="Clientes" asp-action="ObtenerDatosCliente" class="btn btn-primary bg-gray mt-3">
+                            <span>
+                                Read About Us
+                                <svg width="18" height="18">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                    <img src="~/imgs/4.jpg" alt="img" class="img-fluid rounded-4 mt-4">
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0 mb-5">
+                    <img src="~/imgs/2.jpg" alt="img" class="img-fluid rounded-4">
+                    <img src="~/imgs/3.jpg" alt="img" class="img-fluid rounded-4 mt-4">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="padding-medium">
+        <div class="container-fluid padding-side" data-aos="fade-up">
+            <h3 class="display-3 text-center fw-normal col-lg-4 offset-lg-4">Our services & facilities</h3>
+            <div class="row mt-5">
+                <div class="col-md-6 col-xl-4">
+                    <div class="service mb-4 text-center rounded-4 p-5">
+                        <div class="position-relative">
+                            <svg class="color" width="70" height="70">
+                                <use xlink:href="#meditation"></use>
+                            </svg>
+
+                        </div>
+                        <h4 class="display-6 fw-normal my-3">Yoga</h4>
+                        <p>
+                            Rejuvenate your body and mind with our yoga and meditation classes, led by experienced instructors.
+                            Whether you're a beginner or an advanced practitioner, our classes cater to all levels and offer a
+                            peaceful retreat from the hustle and bustle of the city. With serene surroundings and expert guidance.
+                        </p>
+                        <a asp-controller="Clientes" asp-action="ObtenerDatosCliente" class="btn btn-arrow">
+                            <span class="text-decoration-underline">
+                                Read More
+                                <svg width="18" height="18">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="service mb-4 text-center rounded-4 p-5">
+                        <div class="position-relative">
+                            <svg class="color" width="70" height="70">
+                                <use xlink:href="#chef-hat"></use>
+                            </svg>
+
+                        </div>
+                        <h4 class="display-6 fw-normal my-3">Dining</h4>
+                        <p>
+                            Rejuvenate your body and mind with our yoga and meditation classes, led by experienced instructors.
+                            Whether you're a beginner or an advanced practitioner, our classes cater to all levels and offer a
+                            peaceful retreat from the hustle and bustle of the city. With serene surroundings and expert guidance.
+                        </p>
+                        <a asp-controller="Clientes" asp-action="ObtenerDatosCliente" class="btn btn-arrow">
+                            <span class="text-decoration-underline">
+                                Read More
+                                <svg width="18" height="18">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="service mb-4 text-center rounded-4 p-5">
+                        <div class="position-relative">
+                            <svg class="color" width="70" height="70">
+                                <use xlink:href="#swimming"></use>
+                            </svg>
+
+                        </div>
+                        <h4 class="display-6 fw-normal my-3">Rooftop Pool</h4>
+                        <p>
+                            Rejuvenate your body and mind with our yoga and meditation classes, led by experienced instructors.
+                            Whether you're a beginner or an advanced practitioner, our classes cater to all levels and offer a
+                            peaceful retreat from the hustle and bustle of the city. With serene surroundings and expert guidance.
+                        </p>
+                        <a asp-controller="Clientes" asp-action="ObtenerDatosCliente" class="btn btn-arrow">
+                            <span class="text-decoration-underline">
+                                Read More
+                                <svg width="18" height="18">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="service mb-4 text-center rounded-4 p-5">
+                        <div class="position-relative">
+                            <svg class="color" width="70" height="70">
+                                <use xlink:href="#dumbbells"></use>
+                            </svg>
+
+                        </div>
+                        <h4 class="display-6 fw-normal my-3">Fitness Center</h4>
+                        <p>
+                            Rejuvenate your body and mind with our yoga and meditation classes, led by experienced instructors.
+                            Whether you're a beginner or an advanced practitioner, our classes cater to all levels and offer a
+                            peaceful retreat from the hustle and bustle of the city.
+                        </p>
+                        <a asp-controller="Clientes" asp-action="ObtenerDatosCliente" class="btn btn-arrow">
+                            <span class="text-decoration-underline">
+                                Read More
+                                <svg width="18" height="18">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="service mb-4 text-center rounded-4 p-5">
+                        <div class="position-relative">
+                            <svg class="color" width="70" height="70">
+                                <use xlink:href="#armchair"></use>
+                            </svg>
+
+                        </div>
+                        <h4 class="display-6 fw-normal my-3">Event Spaces</h4>
+                        <p>
+                            Rejuvenate your body and mind with our yoga and meditation classes, led by experienced instructors.
+                            Whether you're a beginner or an advanced practitioner, our classes cater to all levels and offer a
+                            peaceful retreat from the hustle and bustle of the city.
+                        </p>
+                        <a asp-controller="Clientes" asp-action="ObtenerDatosCliente" class="btn btn-arrow">
+                            <span class="text-decoration-underline">
+                                Read More
+                                <svg width="18" height="18">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <div class="service mb-4 text-center rounded-4 p-5">
+                        <div class="position-relative">
+                            <svg class="color" width="70" height="70">
+                                <use xlink:href="#wifi"></use>
+                            </svg>
+
+
+                        </div>
+                        <h4 class="display-6 fw-normal my-3">Free Wi-Fi</h4>
+                        <p>
+                            Rejuvenate your body and mind with our yoga and meditation classes, led by experienced instructors.
+                            Whether you're a beginner or an advanced practitioner, our classes cater to all levels and offer a
+                            peaceful retreat from the hustle and bustle of the city
+                        </p>
+                        <a asp-controller="Clientes" asp-action="ObtenerDatosCliente" class="btn btn-arrow">
+                            <span class="text-decoration-underline">
+                                Read More
+                                <svg width="18" height="18">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Gallery</h2>
+            <div class="row g-4">
+                <div class="col-6 col-md-4" data-aos="zoom-in">
+                    <img src="https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2019/05/20152451/Mandarin-Oriental-Hong-Kong-3.jpg" alt="Room" class="img-fluid rounded gallery">
+                </div>
+
+                <div class="col-6 col-md-4" data-aos="zoom-in">
+                    <img src="https://static.abc.es/Media/201504/27/hotel12--644x362.jpg" alt="Room" class="img-fluid rounded gallery">
+                </div>
+
+                <div class="col-6 col-md-4" data-aos="zoom-in">
+                    <img src="https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2019/05/20152251/Dorado-Beach-a-Ritz-Carlton-Reserve-3.jpg" alt="Room" class="img-fluid rounded gallery">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="mb-4" data-aos="fade-left">Guest Reviews</h2>
+            <div id="testimonialCarousel" class="carousel carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-aos="fade-up">
+                        <p class="lead">"Amazing experience! Highly recommend!"</p>
+                        <small>- John Doe</small>
+                    </div>
+                    <div class="carousel-item" data-aos="fade-up" data-aos-delay="200">
+                        <p class="lead">"Best hotel I've ever stayed at."</p>
+                        <small>- Jane Smith</small>
+                    </div>
+                    <div class="carousel-item" data-aos="fade-up" data-aos-delay="300">
+                        <p class="lead">"Exceptional service and beautiful location."</p>
+                        <small>- Alex Johnson</small>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5 mb-3" style="background-color: #f9f9f9;">
+        <div class="container" style="max-width: 800px; background: linear-gradient(135deg, #007bff, #00c6ff); border-radius: 15px; color: white; padding: 30px;">
+            <h2 class="text-center mb-4" style="font-size: 1.8rem; font-weight: bold;">Get In Touch</h2>
+            <p class="text-center mb-4" style="font-size: 1rem;">We’d love to hear from you. Drop us a message!</p>
+            <div class="row">
+                <div class="col-md-7">
+                    <form class="p-4" style="background: white; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); color: #333;">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Your Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Your Message</label>
+                            <textarea id="message" class="form-control" rows="4" placeholder="Enter your message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                    </form>
+                </div>
+                <div class="col-md-5 mt-4 mt-md-0">
+                    <div style="color: white;">
+                        <h5><i class="fas fa-phone-alt me-2"></i> Call Us</h5>
+                        <p>+1 (800) 123-4567</p>
+                        <h5><i class="fas fa-map-marker-alt me-2"></i> Visit Us</h5>
+                        <p>123 Beach Resort, Ocean Drive, Paradise City</p>
+                        <h5><i class="fas fa-clock me-2"></i> Opening Hours</h5>
+                        <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+                        <p>Sat - Sun: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

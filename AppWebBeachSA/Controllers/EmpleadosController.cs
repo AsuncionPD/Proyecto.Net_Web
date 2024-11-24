@@ -22,6 +22,11 @@ namespace AppWebBeachSA.Controllers
             httpClient = hotelAPI.Inicial();
         }
 
+        public IActionResult Home()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -61,7 +66,7 @@ namespace AppWebBeachSA.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 HttpContext.Session.SetString("token", autorizacion.Token);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Empleados");
             }
             else
             {

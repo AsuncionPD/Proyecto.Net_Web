@@ -24,9 +24,34 @@ namespace AppWebBeachSA.Controllers
             httpClient = hotelAPI.Inicial();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<Reservacion> reservaciones = new List<Reservacion>();
+            int userId = int.Parse(User.FindFirstValue("UserId"));
+            HttpResponseMessage response = await httpClient.GetAsync($"/Reservaciones/ReservacionesCliente?id={userId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultado = response.Content.ReadAsStringAsync().Result;
+                reservaciones = JsonConvert.DeserializeObject<List<Reservacion>>(resultado);
+            }
+
+
+            if (reservaciones != null)
+            {
+                response = await httpClient.GetAsync("/Paquetes/Listado");
+                List<Paquete> paquetes = new List<Paquete>();
+                if (response.IsSuccessStatusCode)
+                {
+                    var resultado = response.Content.ReadAsStringAsync().Result;
+                    paquetes = JsonConvert.DeserializeObject<List<Paquete>>(resultado);
+                    ViewBag.Paquetes = paquetes;
+
+                }
+                return View(reservaciones);
+            }
+
+            return RedirectToAction("reservar");
         }
 
         [HttpGet]
@@ -69,7 +94,7 @@ namespace AppWebBeachSA.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 HttpContext.Session.SetString("token", autorizacion.Token);
 
-                return RedirectToAction("Index", "Reservaciones");
+                return RedirectToAction("Index", "Clientes");
             }
             else
             {
