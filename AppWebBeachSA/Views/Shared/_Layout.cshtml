@@ -39,7 +39,7 @@
                             if (tipoUsuario == "1")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Paquetes</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Empleados" asp-action="Home">Dashboard</a>
                                 </li>
                             }
                             else
@@ -47,7 +47,7 @@
                                 if (tipoUsuario == "2")
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Reservar</a>
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Clientes" asp-action="Index">Dashboard</a>
                                     </li>
                                 }
                             }
@@ -57,7 +57,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Hola @User.Identity.Name</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Hello @User.Identity.Name</a>
                             </li>
                             
                             if (tipoUsuario == "2")

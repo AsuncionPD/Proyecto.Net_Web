@@ -44,21 +44,17 @@
     }
 
 .buttom {
-    border: 2px solid #Efb810;
-    border-radius:0.5rem;
+    border: 3px solid #b8860b;
+    border-radius: 0.5rem;
     background: none;
     cursor: pointer;
-    color: white;
-    font-size: 1.25rem;
-    font-weight:700;
+    color: black;
 }
 
     .buttom:hover {
-        border-color: #Efb810;
-        background: #Efb810;
-        font-weight: 400;
+        border-color: #b8860b;
+        background: #b8860b;
         color: white !important;
-        font-weight: 700;
     }
 
 .service {

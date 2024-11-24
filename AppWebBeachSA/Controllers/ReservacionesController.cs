@@ -195,14 +195,14 @@ namespace AppWebBeachSA.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create ([Bind] Reservacion reservacion)
         {
-            //El ISBN del libro se genera de forma automatica
+            //El ID de la reservacion se genera de forma automatica
             reservacion.ReservacionID = 0;
             int userId = int.Parse(User.FindFirstValue("UserId"));
             reservacion.ClienteID = userId;
 
 
 
-            //Se utiliza la API web  para almacenar los datos del libro
+            //Se utiliza la API web  para almacenar los datos de la reservacion
             var agregar =  httpClient.PostAsJsonAsync<Reservacion>("/Reservaciones/Agregar", reservacion);
 
             await agregar;  //se espera que termine la transacción
@@ -211,7 +211,7 @@ namespace AppWebBeachSA.Controllers
 
             if (resultado.IsSuccessStatusCode) //si todo fue correcto
             {
-                //se ubica al usuario dentro del listado  libros
+                //se ubica al usuario dentro del listado de reservaciones
                 return RedirectToAction("Index");
             }
             else

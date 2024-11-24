@@ -34,6 +34,6 @@ body {
     color: #000000;
 }
 
-.hover-effect:hover {
-    color: #0dcaf0; 
-}
+    .hover-effect:hover {
+        color: #b8860b;
+    }

@@ -6,11 +6,11 @@
 }
 
 <div class="d-flex align-items-center justify-content-center">
-    <div style="width: 80%;">
-        <h1 class="mt-5">Manage Packages</h1>
+    <div style="width: 80%;" class="card border-0 shadow p-4 mt-5 ">
+        <h1>Manage Packages</h1>
 
-        <p class="mb-4" style="margin-top:2rem;">
-            <a class="btn btn-outline-info fw-bold" asp-action="Create">Create New</a>
+        <p class="mb-4" style="margin-top:2rem";>
+            <a class="btn fw-bold buttom" asp-action="Create">Create New</a>
         </p>
 
 
@@ -111,7 +111,7 @@
 
                                             </div>
                                             <div class="modal-footer mx-3">
-                                                <button type="button" class="btn btn-info text-white fw-bold" data-bs-dismiss="modal">Close</button>
+                                                <button style="background-color:#b8860b;" type="button" class="btn text-white fw-bold" data-bs-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
 
                                             </div>
                                             <div class="modal-footer mx-3">
-                                                <button type="button" class="btn btn-info text-white fw-bold" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" style="background-color:#b8860b;" class="btn text-white fw-bold" data-bs-dismiss="modal">Cancel</button>
                                                 <form asp-action="Delete" asp-controller="Paquetes" method="post">
                                                     @Html.AntiForgeryToken()
                                                     <input type="hidden" name="id" value="@item.PaqueteID" />
