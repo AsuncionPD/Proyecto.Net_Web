@@ -22,8 +22,44 @@ namespace AppWebBeachSA.Controllers
             httpClient = hotelAPI.Inicial();
         }
 
-        public IActionResult Home()
+        public async Task<IActionResult> Home()
         {
+            int packageCount = 0;
+            int employeeCount = 0;
+            int reservationCount = 0;
+
+            try
+            {
+                HttpResponseMessage packageResponse = await httpClient.GetAsync("/Paquetes/Count");
+                if (packageResponse.IsSuccessStatusCode)
+                {
+                    var result = await packageResponse.Content.ReadAsStringAsync();
+                    packageCount = int.Parse(result); 
+                }
+
+                HttpResponseMessage employeeResponse = await httpClient.GetAsync("/Empleados/Count");
+                if (employeeResponse.IsSuccessStatusCode)
+                {
+                    var result = await employeeResponse.Content.ReadAsStringAsync();
+                    employeeCount = int.Parse(result);
+                }
+
+                HttpResponseMessage reservationResponse = await httpClient.GetAsync("/Reservaciones/Count");
+                if (reservationResponse.IsSuccessStatusCode)
+                {
+                    var result = await reservationResponse.Content.ReadAsStringAsync();
+                    reservationCount = int.Parse(result);  
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Mensaje"] = $"Error al obtener los datos: {ex.Message}";
+            }
+
+            ViewBag.PackageCount = packageCount;
+            ViewBag.EmployeeCount = employeeCount;
+            ViewBag.ReservationCount = reservationCount;
+
             return View();
         }
 
