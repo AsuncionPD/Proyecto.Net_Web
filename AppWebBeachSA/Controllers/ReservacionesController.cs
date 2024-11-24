@@ -79,7 +79,7 @@ namespace AppWebBeachSA.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> paquete(int id)
+        public async Task<IActionResult> Paquete(int id)
         {
             HttpResponseMessage response = await httpClient.GetAsync($"/Paquetes/Buscar?id={id}");
             Paquete paquete = new Paquete();
@@ -96,6 +96,8 @@ namespace AppWebBeachSA.Controllers
                 var paquetes = JsonConvert.DeserializeObject<List<Paquete>>(content);
                 int indice = paquetes.FindIndex(paquete => paquete.PaqueteID == id);
                 ViewBag.image = indice+"Room.jpg";
+                ViewBag.today = DateTime.Now;
+
                 return View();
 
             }
@@ -117,14 +119,15 @@ namespace AppWebBeachSA.Controllers
             else if (noches >= 13)
                 return 25;
             else
-                return 0; // Sin descuento
+                return 0; 
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> paquete([Bind] Reservacion reservacion, int id)
+        public async Task<IActionResult> Paquete([Bind] Reservacion reservacion,int id)
         {
+            
             HttpResponseMessage response = await httpClient.GetAsync($"/Paquetes/Buscar?id={id}");
             Paquete paquete = new Paquete();
             if (response.IsSuccessStatusCode)
@@ -142,6 +145,8 @@ namespace AppWebBeachSA.Controllers
                 var paquetes = JsonConvert.DeserializeObject<List<Paquete>>(content);
                 int indice = paquetes.FindIndex(paquete => paquete.PaqueteID == id);
                 ViewBag.image = indice + "Room.jpg";
+                ViewBag.today = DateTime.Now;
+
 
             }
 
@@ -150,11 +155,20 @@ namespace AppWebBeachSA.Controllers
             reservacion.TotalSinDescuento = reservacion.Noches * reservacion.Personas * paquete.PrecioPorPersonaPorNoche;
 
             // Calcular porcentaje de descuento
-            var descuentoPorcentaje = CalcularDescuento(reservacion.Noches);
-            reservacion.DescuentoPorcentaje = descuentoPorcentaje;
+            if (reservacion.FormaPago.Equals("Card"))
+            {
+                reservacion.DescuentoPorcentaje = 0;
+
+            }
+            else
+            {
+                var descuentoPorcentaje = CalcularDescuento(reservacion.Noches);
+                reservacion.DescuentoPorcentaje = descuentoPorcentaje;
+            }
+      
 
             // Total con descuento
-            reservacion.TotalConDescuento = reservacion.TotalSinDescuento * (1 - (descuentoPorcentaje / 100));
+            reservacion.TotalConDescuento = reservacion.TotalSinDescuento * (1 - (reservacion.DescuentoPorcentaje / 100));
 
             // Agregar IVA
             const decimal IVA = 13;
@@ -200,6 +214,7 @@ namespace AppWebBeachSA.Controllers
             reservacion.ReservacionID = 0;
             int userId = int.Parse(User.FindFirstValue("UserId"));
             reservacion.ClienteID = userId;
+            httpClient.DefaultRequestHeaders.Authorization = AutorizacionToken();
 
 
 
@@ -225,8 +240,7 @@ namespace AppWebBeachSA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("Delete")]
-        public async Task<IActionResult> DeleteBook(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             httpClient.DefaultRequestHeaders.Authorization = AutorizacionToken();
 
@@ -263,10 +277,129 @@ namespace AppWebBeachSA.Controllers
             return authentication;
         }
 
+        [HttpGet]
+
+        public async Task<IActionResult> Update(int id)
+        {
+            HttpResponseMessage responseReservacion = await httpClient.GetAsync($"/Reservaciones/Buscar?id={id}");
+            Reservacion reservacion = null;
+            if (responseReservacion.IsSuccessStatusCode)
+            {
+                var resultado = responseReservacion.Content.ReadAsStringAsync().Result;
+                reservacion = JsonConvert.DeserializeObject<Reservacion>(resultado);
+            }
+            HttpResponseMessage response = await httpClient.GetAsync($"/Paquetes/Buscar?id={reservacion.PaqueteID}");
+            Paquete paquete = new Paquete();
+            if (response.IsSuccessStatusCode)
+            {
+                var resultado = response.Content.ReadAsStringAsync().Result;
+                paquete = JsonConvert.DeserializeObject<Paquete>(resultado);
+                ViewBag.paquete = paquete;
+            }
+            var image = await httpClient.GetAsync("https://localhost:7160/Paquetes/Listado");
+            if (image.IsSuccessStatusCode)
+            {
+                var content = image.Content.ReadAsStringAsync().Result;
+                var paquetes = JsonConvert.DeserializeObject<List<Paquete>>(content);
+                int indice = paquetes.FindIndex(paquete => paquete.PaqueteID == reservacion.PaqueteID);
+                ViewBag.image = indice + "Room.jpg";
+                return View(reservacion);
+            }
+
+            return RedirectToAction("Index");
 
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update([Bind] Reservacion reservacion, int id)
+        {
+
+            HttpResponseMessage responseReservacion = await httpClient.GetAsync($"/Reservaciones/Buscar?id={id}");
+            Reservacion reservacionOld = null;
+            if (responseReservacion.IsSuccessStatusCode)
+            {
+                var resultado = responseReservacion.Content.ReadAsStringAsync().Result;
+                reservacionOld = JsonConvert.DeserializeObject<Reservacion>(resultado);
+            }
+            HttpResponseMessage response = await httpClient.GetAsync($"/Paquetes/Buscar?id={reservacionOld.PaqueteID}");
+            Paquete paquete = new Paquete();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultado = response.Content.ReadAsStringAsync().Result;
+                paquete = JsonConvert.DeserializeObject<Paquete>(resultado);
+                ViewBag.paquete = paquete;
+
+            }
+
+            // Total sin descuento
+            reservacion.TotalSinDescuento = reservacion.Noches * reservacion.Personas * paquete.PrecioPorPersonaPorNoche;
+
+            // Calcular porcentaje de descuento
+            if (reservacion.FormaPago.Equals("Card"))
+            {
+                reservacion.DescuentoPorcentaje = 0;
+            }
+            else
+            {
+                var descuentoPorcentaje = CalcularDescuento(reservacion.Noches);
+                reservacion.DescuentoPorcentaje = descuentoPorcentaje;
+            } 
 
 
+            // Total con descuento
+            reservacion.TotalConDescuento = reservacion.TotalSinDescuento * (1 - (reservacion.DescuentoPorcentaje / 100));
+
+            // Agregar IVA
+            const decimal IVA = 13;
+            decimal totalFinalConIVA = reservacion.TotalConDescuento * (1 + IVA / 100);
+
+
+            // Calcular otros valores
+            reservacion.Prima = reservacion.TotalConDescuento * (paquete.PrimaPorcentaje / 100);
+            reservacion.RestoEnMensualidades = (reservacion.TotalConDescuento - reservacion.Prima) / paquete.Mensualidades;
+
+            var tipoCambio = await httpClient.GetAsync("https://apis.gometa.org/tdc/tdc.json");
+            if (tipoCambio.IsSuccessStatusCode)
+            {
+                var content = await tipoCambio.Content.ReadAsStringAsync();
+                dynamic data = JObject.Parse(content);
+                reservacion.TipoCambio = data.venta;
+            }
+
+
+            reservacion.TotalUSD = totalFinalConIVA / reservacion.TipoCambio;           
+            if(reservacionOld.FormaPago != reservacion.FormaPago)
+            {
+                if (reservacionOld.FormaPago.Equals("Cheque")) {
+                    reservacion.Banco = "";
+                    reservacion.NumeroCheque = "";
+
+                }
+            }
+            reservacion.PaqueteID = reservacionOld.PaqueteID;
+            reservacion.ClienteID = reservacionOld.ClienteID;
+            reservacion.ReservacionID = reservacionOld.ReservacionID;
+
+            httpClient.DefaultRequestHeaders.Authorization = AutorizacionToken();
+            var modificar = httpClient.PutAsJsonAsync<Reservacion>("/Reservaciones/Editar", reservacion);
+            await modificar;
+            var update = modificar.Result;
+            if (update.IsSuccessStatusCode)
+            {
+                TempData["Delete"] = "Reservation updated correctly";
+                return Redirect(Url.Action("Index", "Clientes") + "#reservations");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuarios");
+
+            }
+
+
+        }
 
 
     }

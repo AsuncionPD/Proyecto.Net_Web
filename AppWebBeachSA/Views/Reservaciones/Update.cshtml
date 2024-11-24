@@ -1,0 +1,124 @@
+﻿@model AppWebBeachSA.Models.Reservacion
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body style="background-color:#413E3E">
+    <section>
+        <div class="container pb-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card border-0 mt-3" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-5 d-none d-md-block ">
+                                <img src="~/imgs/@ViewBag.image"
+                                     alt="Room" class="img-fluid h-100" style="border-radius: 1rem 0 0 1rem;" />
+                            </div>
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5 text-black">
+
+                                    <form asp-action="Update" method="post">
+                                        @if (TempData["Error"] != null)
+                                        {
+                                            <div class="alert alert-warning" role="alert">
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                                                <storng>@TempData["Error"]</storng>
+
+                                            </div>
+                                        }
+
+                                        <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">@ViewBag.paquete.Nombre - Update</h2>
+                                        <div class="mb-3">
+                                            <label for="fecha" asp-for="FechaReservacion" class="form-label">Fecha</label>
+                                            <input type="date" min="ViewBag.today" class="form-control" id="fecha" asp-for="FechaReservacion" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label asp-for="Noches" for="noches" class="form-label">Noches</label>
+                                            <input type="number" class="form-control" id="noches" name="noches" asp-for="Noches" min="1" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="personas" asp-for="Personas" class="form-label">Personas</label>
+                                            <input type="number" asp-for="Personas" class="form-control" id="personas" name="personas" min="1" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label asp-for="FormaPago" class="control-label ">Payment Method</label>
+                                            <select asp-for="FormaPago" class="form-control mt-2">
+                                                <option value="Card">Card</option>
+                                                <option value="Cash">Cash</option>
+                                                <option value="Cheque">Cheque </option>
+                                            </select>
+                                            <span asp-validation-for="FormaPago" class="text-danger"></span>
+                                        </div>
+
+                                        <div id="chequeFields" class="d-none">
+                                            <div class="mb-3">
+                                                <label asp-for="NumeroCheque" class="control-label">Cheque Number</label>
+                                                <input asp-for="NumeroCheque" class="form-control mt-2" />
+                                                <span asp-validation-for="NumeroCheque" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label asp-for="Banco" class="control-label">Bank</label>
+                                                <input asp-for="Banco" class="form-control mt-2" />
+                                                <span asp-validation-for="Banco" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <button type="button" value="Update" class="btn btn-primary bg-gray" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
+
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to update your reservation?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="submit" value="Update" class="btn btn-danger" /> 
+
+                                                        <button type="button" class="btn btn-primary bg-gray " data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const formaPago = document.getElementById("FormaPago");
+        const chequeFields = document.getElementById("chequeFields");
+
+        // Verificar inicialmente el valor de FormaPago al cargar el documento
+        if (formaPago.value === "Cheque") {
+            chequeFields.classList.remove("d-none");
+        } else {
+            chequeFields.classList.add("d-none");
+        }
+
+        // Escuchar cambios en el campo FormaPago
+        formaPago.addEventListener("change", function () {
+            if (this.value === "Cheque") {
+                chequeFields.classList.remove("d-none");
+            } else {
+                chequeFields.classList.add("d-none");
+            }
+        });
+    });
+</script>
+
+

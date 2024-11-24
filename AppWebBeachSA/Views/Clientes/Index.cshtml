@@ -236,7 +236,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <a asp-action="paquete" asp-controller="Reservaciones" asp-route-id="@item.PaqueteID">
+                                    <a asp-action="Paquete" asp-controller="Reservaciones" asp-route-id="@item.PaqueteID">
                                         <p class="text-decoration-underline text-white m-0 mt-2">Browse Now</p>
                                     </a>
                                 </div>
@@ -278,7 +278,7 @@
                         <div class="card border-0 shadow-sm rounded-4">
                             <img src="~/imgs/@image" class="card-img-top rounded-top-4" alt="Room Image">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold">Deluxe Room</h5>
+                                <h5 class="card-title fw-bold">@ViewBag.Paquetes[@item.PaqueteID - 1].Nombre</h5>
                                 <p class="card-text text-muted mb-1">
                                     <i class="bi bi-calendar-check me-2"></i><strong>Check-in:</strong> @item.FechaReservacion
                                 </p>
@@ -292,9 +292,9 @@
                                     <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2" data-bs-toggle="modal" data-bs-target="#@idModal">
                                         <i class="bi bi-eye me-2"></i>View
                                     </button>
-                                    <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
+                                    <a asp-action="Update" asp-controller="Reservaciones" asp-route-id="@item.ReservacionID" class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2">
                                         <i class="bi bi-pencil me-2"></i>Modify
-                                    </button>
+                                    </a>
                                     <button class="btn btn-primary bg-gray mt-3 btn-lg d-flex align-items-center justify-content-center w-100 me-2" data-bs-toggle="modal" data-bs-target="#@idModalDelete">
                                         <i class="bi bi-trash me-2"></i>Cancel
                                     </button>
@@ -343,7 +343,7 @@
 
                                         <div class="form-group col-md-6">
                                             <label class="control-label">Reservation Date</label>
-                                            <input readonly value="@item.ReservacionID" class="form-control mt-2" />
+                                            <input readonly value="@item.FechaReservacion" class="form-control mt-2" />
                                         </div>
 
                                         <div class="form-group col-md-6">
