@@ -14,16 +14,16 @@
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
         html, body {
-            height: 100%; 
+            height: 100%;
         }
 
         body {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
         }
 
         main {
-            flex: 1; 
+            flex: 1;
         }
     </style>
 </head>
@@ -48,6 +48,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li><a asp-area="" asp-controller="Clientes" asp-action="Contact" class="nav-link text-light">Contact</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index" class="nav-link text-light">Reservations</a></li>
+                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index" class="nav-link text-light">Our Services</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="Clientes" asp-action="Login" class="nav-link text-light">Reservations</a></li>
+                            <li><a asp-area="" asp-controller="Clientes" asp-action="Login" class="nav-link text-light">Our Services</a></li>
+                        }
                         @if (User.Identity.IsAuthenticated)
                         {
 
@@ -74,7 +85,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="" asp-action="">Hello @User.Identity.Name</a>
                             </li>
-                            
+
                             if (tipoUsuario == "2")
                             {
                                 <li class="nav-item">
@@ -99,7 +110,7 @@
             </div>
         </nav>
     </header>
-    <div >
+    <div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -109,7 +120,7 @@
     <footer class="bg-dark text-white py-5 mt-auto">
         <div class="container">
             <div class="row">
-               
+
                 <div class="col-md-4" data-aos="fade-up">
                     <h5 class="fw-bold">Hotel Beach</h5>
                     <p class="text-secondary mt-3">
@@ -142,48 +153,56 @@
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                     <h5 class="fw-bold">Useful Links</h5>
                     <ul class="list-unstyled mt-3">
-                        <li><a href="#about-us" class="text-secondary text-decoration-none d-block">About Us</a></li>
-                        <li><a href="#services" class="text-secondary text-decoration-none d-block">Our Services</a></li>
-                        <li><a href="#reservations" class="text-secondary text-decoration-none d-block">Reservations</a></li>
-                        <li><a href="#contact" class="text-secondary text-decoration-none d-block">Contact</a></li>
-                    </ul>
+                        <li><a asp-area="" asp-controller="Clientes" asp-action="Contact" class="text-secondary text-decoration-none d-block">Contact</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index" class="text-secondary text-decoration-none d-block">Reservations</a></li>
+                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index" class="text-secondary text-decoration-none d-block">Our Services</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="Clientes" asp-action="Login" class="text-secondary text-decoration-none d-block">Reservations</a></li>
+                            <li><a asp-area="" asp-controller="Clientes" asp-action="Login" class="text-secondary text-decoration-none d-block">Our Services</a></li>
+                        }
+
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <h5 class="fw-bold">Contact Us</h5>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2">
+                                <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
+                                <span class="text-secondary">123 Beach, Puntarenas</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-telephone-fill me-2 text-primary"></i>
+                                <span class="text-secondary">+506 1234 5678</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-envelope-fill me-2 text-primary"></i>
+                                <span class="text-secondary">info@hotelbeach.com</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <h5 class="fw-bold">Contact Us</h5>
-                    <ul class="list-unstyled mt-3">
-                        <li class="mb-2">
-                            <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
-                            <span class="text-secondary">123 Beach, Puntarenas</span>
-                        </li>
-                        <li class="mb-2">
-                            <i class="bi bi-telephone-fill me-2 text-primary"></i>
-                            <span class="text-secondary">+506 1234 5678</span>
-                        </li>
-                        <li class="mb-2">
-                            <i class="bi bi-envelope-fill me-2 text-primary"></i>
-                            <span class="text-secondary">info@hotelbeach.com</span>
-                        </li>
-                    </ul>
+                <div class="text-center mt-4" data-aos="">
+                    <p class="text-secondary">&copy; 2024 Hotel Beach. All rights reserved.</p>
                 </div>
             </div>
+        </footer>
 
-            <div class="text-center mt-4" data-aos="fade-up">
-                <p class="text-secondary">&copy; 2024 Hotel Beach. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1000, // Tiempo de animación
-            once: true, // Se ejecuta solo una vez
-        });
-    </script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 1000, 
+                once: true, 
+            });
+        </script>
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+    </html>

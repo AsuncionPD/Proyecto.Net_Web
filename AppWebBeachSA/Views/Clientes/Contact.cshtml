@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Hotel Beach</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/contact.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    
+    <main class="flex-grow-1">
+        <section id="contact" class="py-5 mb-3" style="background-color: #f9f9f9;">
+            <div class="container" style="max-width: 800px; background: linear-gradient(135deg, #007bff, #00c6ff); border-radius: 15px; color: white; padding: 30px;">
+                <h2 class="text-center mb-4" style="font-size: 1.8rem; font-weight: bold;">Get In Touch</h2>
+                <p class="text-center mb-4" style="font-size: 1rem;">We’d love to hear from you. Drop us a message!</p>
+                <div class="row">
+                    <div class="col-md-7">
+                        <form class="p-4" style="background: white; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); color: #333;">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Your Email</label>
+                                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Your Message</label>
+                                <textarea id="message" class="form-control" rows="4" placeholder="Enter your message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="col-md-5 mt-4 mt-md-0">
+                        <div style="color: white;">
+                            <h5><i class="fas fa-phone-alt me-2"></i> Call Us</h5>
+                            <p>+1 (800) 123-4567</p>
+                            <h5><i class="fas fa-map-marker-alt me-2"></i> Visit Us</h5>
+                            <p>123 Beach Resort, Ocean Drive, Paradise City</p>
+                            <h5><i class="fas fa-clock me-2"></i> Opening Hours</h5>
+                            <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+                            <p>Sat - Sun: Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+    </script>
+</body>
+</html>
+

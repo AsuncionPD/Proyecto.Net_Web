@@ -24,6 +24,13 @@ namespace AppWebBeachSA.Controllers
             httpClient = hotelAPI.Inicial();
         }
 
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+
         public async Task<IActionResult> Index()
         {
             List<Reservacion> reservaciones = new List<Reservacion>();
@@ -186,4 +193,7 @@ namespace AppWebBeachSA.Controllers
             return View();
         }
     }
+
+
+    
 }
