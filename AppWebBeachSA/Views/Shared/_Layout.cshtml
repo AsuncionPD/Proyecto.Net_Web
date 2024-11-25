@@ -48,8 +48,11 @@
                         <li><a asp-area="" asp-controller="Clientes" asp-action="Contact" class="nav-link text-light">Contact</a></li>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index" class="nav-link text-light">Reservations</a></li>
-                            <li><a asp-area="" asp-controller="Clientes" asp-action="Index" class="nav-link text-light">Our Services</a></li>
+                            if (tipoUsuario == "2")
+                            {
+                                <li><a asp-area="" asp-controller="Clientes" asp-action="Index" class="nav-link text-light">Reservations</a></li>
+                                <li><a asp-area="" asp-controller="Clientes" asp-action="Index" class="nav-link text-light">Our Services</a></li>
+                            }
                         }
                         else
                         {
@@ -153,8 +156,11 @@
                         <li><a asp-area="" asp-controller="Clientes" asp-action="Contact" class="text-secondary text-decoration-none d-block">Contact</a></li>
                         @if (User.Identity.IsAuthenticated)
                         {
+                            if (tipoUsuario == "2")
+                            {
                             <li><a asp-area="" asp-controller="Clientes" asp-action="Index" class="text-secondary text-decoration-none d-block">Reservations</a></li>
                             <li><a asp-area="" asp-controller="Clientes" asp-action="Index" class="text-secondary text-decoration-none d-block">Our Services</a></li>
+                            }
                         }
                         else
                         {
