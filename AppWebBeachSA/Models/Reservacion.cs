@@ -6,16 +6,20 @@ namespace AppWebBeachSA.Models
     {
         [Key]
         [Required]
+        [Display(Name = "Reservation ID")]
         public int ReservacionID { get; set; }
 
         [Required]
+        [Display(Name = "Customer")]
         public int ClienteID { get; set; }
 
         [Required]
+        [Display(Name = "Package")]
         public int PaqueteID { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
+        [Display(Name = "Booking Date")]
         public DateTime FechaReservacion { get; set; }
 
         [Required]
@@ -34,9 +38,11 @@ namespace AppWebBeachSA.Models
         public decimal DescuentoPorcentaje { get; set; }
 
         [Required]
+        [Display(Name = "Total")]
         public decimal TotalConDescuento { get; set; }
 
         [Required]
+        [Display(Name = "Payment method")]
         public string FormaPago { get; set; }
 
         public string NumeroCheque { get; set; } 

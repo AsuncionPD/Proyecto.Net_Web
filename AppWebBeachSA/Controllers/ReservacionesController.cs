@@ -402,5 +402,20 @@ namespace AppWebBeachSA.Controllers
         }
 
 
+        public async Task<IActionResult> Listado()
+        {
+            List<Reservacion> reservacion = new List<Reservacion>();
+
+            HttpResponseMessage response = await httpClient.GetAsync("/Reservaciones/Listado");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var resultado = response.Content.ReadAsStringAsync().Result;
+                reservacion = JsonConvert.DeserializeObject<List<Reservacion>>(resultado);
+            }
+
+            return View(reservacion);
+        }
+
     }
 }

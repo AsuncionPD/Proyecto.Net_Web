@@ -1,0 +1,139 @@
+﻿@model IEnumerable<AppWebBeachSA.Models.Reservacion>
+
+@{
+    ViewData["Title"] = "Listado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex align-items-center justify-content-center">
+    <div style="width: 80%;" class="card border-0 shadow p-4 my-5 ">
+        <h1 class="mb-5">Manage Reservations</h1>
+
+        <div class="table-responsive" style="max-height: 560px; overflow-y: auto;">
+            <table class="table table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ReservacionID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClienteID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PaqueteID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaReservacion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FormaPago)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalConDescuento)
+                        </th>
+                        <th>
+                            Details
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReservacionID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClienteID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaqueteID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaReservacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FormaPago)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalConDescuento)
+                            </td>
+                         
+                            <td>
+                                @{
+                                    var idDetailsModal = "Details_" + item.ReservacionID;
+                                }
+
+                                <!-- Button details -->
+                                <button type="button" class="border-0 bg-transparent btn btn-link" data-bs-toggle="modal" data-bs-target="#@idDetailsModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-square hover-effect" viewBox="0 0 16 16">
+                                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
+                                    </svg>
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id=@idDetailsModal tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header mx-3">
+                                                <h3 class="modal-title fw-bold" id="exampleModalLabel">Reservation Details</h3>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body mx-3 text-start row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="fw-bold">Customer</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.ClienteID</div>
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="fw-bold">Package</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.PaqueteID</div>
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="fw-bold">Booking Date</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.FechaReservacion</div>
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="fw-bold">Nights</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.Noches</div>
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="fw-bold">Number of guests</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.Personas</div>
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="fw-bold">Payment method</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">@item.FormaPago</div>
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="fw-bold">Total in colones</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">₡@item.TotalConDescuento</div>
+                                                </div>
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="fw-bold">Total in dollars</label>
+                                                    <div style="border-color:#d6d6d6" class="form-control border-1">$@item.TotalUSD</div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer mx-3">
+                                                <button style="background-color:#b8860b;" type="button" class="btn text-white fw-bold" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
