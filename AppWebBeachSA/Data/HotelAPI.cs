@@ -6,7 +6,7 @@
         public HttpClient Inicial()
         {
             var client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:7160");
+            client.BaseAddress = new Uri("http://www.apibeachsa.somee.com");
             return client;
         }
     }

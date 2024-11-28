@@ -89,7 +89,7 @@ namespace AppWebBeachSA.Controllers
                 paquete = JsonConvert.DeserializeObject<Paquete>(resultado);
                 ViewBag.paquete= paquete;
             }
-            var image = await httpClient.GetAsync("https://localhost:7160/Paquetes/Listado");
+            var image = await httpClient.GetAsync("/Paquetes/Listado");
             if (image.IsSuccessStatusCode)
             {
                 var content =  image.Content.ReadAsStringAsync().Result;
@@ -138,7 +138,7 @@ namespace AppWebBeachSA.Controllers
 
             }
 
-            var image = await httpClient.GetAsync("https://localhost:7160/Paquetes/Listado");
+            var image = await httpClient.GetAsync("/Paquetes/Listado");
             if (image.IsSuccessStatusCode)
             {
                 var content = image.Content.ReadAsStringAsync().Result;
@@ -296,7 +296,7 @@ namespace AppWebBeachSA.Controllers
                 paquete = JsonConvert.DeserializeObject<Paquete>(resultado);
                 ViewBag.paquete = paquete;
             }
-            var image = await httpClient.GetAsync("https://localhost:7160/Paquetes/Listado");
+            var image = await httpClient.GetAsync("/Paquetes/Listado");
             if (image.IsSuccessStatusCode)
             {
                 var content = image.Content.ReadAsStringAsync().Result;
